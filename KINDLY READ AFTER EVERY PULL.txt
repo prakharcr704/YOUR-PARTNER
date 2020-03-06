@@ -1,0 +1,59 @@
+------------------------------------------------------------------------------------------------------------
+install mysql and run these queries
+
+create database yourpartner;
+
+create table credentials( 
+	MemberID char(20) primary key,
+	EmailID char(30) unique,
+	MobileNO char(10) unique,
+	password char(20)
+);
+
+create table onlyregistered(
+	MemberID char(20) primary key,
+	EmailID char(30) unique, 
+	MobileNO char(10) unique, 
+	FirstName char(20), 
+	LastName char(20), 
+	AgeDate integer(2), 
+	AgeMonth integer(2), 
+	AgeYear integer(4), 
+	Gender char(1),
+	foreign key(MemberID) references  credentials(MemberID) on delete cascade, 
+	foreign key(EmailID) references  credentials(EmailID) on delete cascade, 
+	foreign key(MobileNO) references credentials(MobileNO) on delete cascade
+);
+
+
+
+create table fullyregistered(
+	MemberID char(20) primary key,
+	Occupation char(20),
+	Income integer(12),
+	Address char(100),
+	Interest char(20),
+	Citizenship char(20),
+	City char(20),
+	Age integer(2),
+	AboutMyself char(200),
+	Complexion char(10),
+	Height char(10),
+	Weight char(10),
+	Expectations char(60),
+	MartialStatus char(15),
+	ChildrenStatus integer(1),
+	Smoke char(5),
+	Drink char(5),
+	Education char(100),
+	Caste char(10),
+	MotherTongue char(15),
+	FatherOccupation char(20),
+	MotherOccupation char(20),
+	Sisters integer(1),
+	Brothers integer(1),
+	FamilyType char(20),
+	foreign key(MemberID) references credentials(MemberID) on delete cascade
+);
+
+-------------------------------------------------------------------------------------------------------------
