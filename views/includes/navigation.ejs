@@ -1,0 +1,35 @@
+	<nav class="fh5co-nav" role="navigation">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+					<div id="fh5co-logo"><a href="index.html">YP<strong>.</strong></a></div>
+				</div>
+				<div class="col-xs-10 text-right menu-1">
+					<ul>
+						<li class="<%if(path === "homepage") {%>active<%}%>" ><a href="/">Home</a></li>
+						<li class="<%if(path === "about") {%>active<%}%>" ><a href="/about">Story</a></li>
+						<li class="has-dropdown<%if(path === "services") {%> active<%}%>">
+							<a href="/services">Services</a>
+							<ul class="dropdown">
+								<li><a href="#">Web Design</a></li>
+								<li><a href="#">eCommerce</a></li>
+								<li><a href="#">Branding</a></li>
+								<li><a href="#">API</a></li>
+							</ul>
+						</li>
+						<li  class="has-dropdown<%if(path === "gallery") {%> active<%}%>">
+							<a href="/gallery">Gallery</a>
+							<ul class="dropdown">
+								<li><a href="#">HTML5</a></li>
+								<li><a href="#">CSS3</a></li>
+								<li><a href="#">Sass</a></li>
+								<li><a href="#">jQuery</a></li>
+							</ul>
+						</li>
+						<li class="<%if(path === "contact"){%>active<%}%>"><a href="/contact">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+			
+		</div>
+	</nav>

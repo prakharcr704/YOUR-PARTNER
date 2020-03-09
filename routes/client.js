@@ -15,6 +15,10 @@ const clientController = require('../controllers/client');
 /*link routers*/
 const router = express.Router();
 router.get('/',clientController.getHomepage);
+router.get('/about',clientController.getAboutpage);
+router.get('/services',clientController.getServicespage);
+router.get('/gallery',clientController.getGalleryPage);
+router.get('/contact',clientController.getContactpage);
 
 
 /////////////////////////////////////////////////////////
