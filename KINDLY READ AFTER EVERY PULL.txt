@@ -1,4 +1,45 @@
 ------------------------------------------------------------------------------------------------------------
+Authentication process is done, 
+for testing purpose you are required to insert the data manually into the tables for now
+
+
+edit-profile page is needed to be updated
+the fields in edit-profile page should be the following
+        EmailID,
+	MobileNO,
+	FirstName,
+	LastName,
+	AgeDate,
+	AgeMonth,
+	AgeYear,
+	Gender,
+        Occupation,
+	Income,
+	Address,
+	Interest,
+	Citizenship,
+	City char(20),
+	Age integer(2),
+	AboutMyself,
+	Complexion,
+	Height,
+	Weight,
+	Expectations,
+	MartialStatus,
+	ChildrenStatus,
+	Smoke,
+	Drink,
+	Education,
+	Caste,
+	MotherTongue,
+	FatherOccupation,
+	MotherOccupation,
+	Sisters,
+	Brothers,
+	FamilyType
+
+
+------------------------------------------------------------------------------------------------------------
 install mysql and run these queries
 
 create database yourpartner;
