@@ -27,22 +27,21 @@
 	</header>
 
 
-<%- include('./includes/IndexAndGalleryAndContactAndServicesBrideAndGroomDescription.ejs') %>
-
 <center>
 <div class="container">  
 <frameset>
- 
+
+	<br> <br>
 <legend>  <h1>Login Now</h1> </legend>  
  
-<form style="width:300px" action="https://www.javatpoint.com/javascriptpages/valid.jsp">  
+<form style="width:300px" action="/auth/validateLogin" method="post">
   <div class="form-group">  
     <label for="exampleInputEmail1">Email address</label>  
-    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">  
+    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" name="email">
   </div>  
   <div class="form-group">  
     <label for="exampleInputPassword1">Password</label>  
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">  
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
   </div>  
     
   <button type="submit" class="btn btn-primary">Submit</button>  
@@ -50,8 +49,10 @@
   </frameset>
 </div>  
   
- </center> 
- <br> <br>
+ </center>
+
+		<%- include('./includes/IndexAndGalleryAndContactAndServicesBrideAndGroomDescription.ejs') %>
+
 	<div id="fh5co-event" class="fh5co-bg" style="background-image:url(/images/img_bg_3.jpg);">
 		<div class="overlay"></div>
 		<div class="container">

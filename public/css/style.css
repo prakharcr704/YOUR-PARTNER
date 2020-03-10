@@ -1806,7 +1806,7 @@ form label {
 
 .form-control {
   box-shadow: none;
-  background: transparent;
+  background: white;
   border: 2px solid rgba(0, 0, 0, 0.1);
   height: 54px;
   font-size: 18px;

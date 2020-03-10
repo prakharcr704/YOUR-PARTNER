@@ -1,0 +1,51 @@
+<%- include('../includes/head.ejs') %>
+<body>
+
+<div class="fh5co-loader"></div>
+
+<div id="page">
+
+    <%- include('../includes/navigation.ejs') %>
+
+    <header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(/images/dubai.jpg);" data-stellar-background-ratio="0.5">
+
+        <div class="overlay">
+
+            <center>
+
+
+                <div class="">
+
+                    <br> <br>
+                    <br> <br>
+                    <br> <br>
+                    <br> <br>
+                    <h1 style="color: white">Login Now</h1>
+
+                    <form style="width:300px" action="/auth/validateLogin" method="post">
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" name="email">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+
+            </center>
+        </div>
+
+    </header>
+
+
+    <%- include('../includes/footer.ejs')%>
+
+    <%- include('../includes/commonScripts.ejs')%>
+
+
+
+</body>
+</html>
+
