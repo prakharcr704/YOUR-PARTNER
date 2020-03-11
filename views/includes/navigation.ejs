@@ -18,7 +18,9 @@
 						</li>
 						<li class="<%if(path === "about") {%>active<%}%>" ><a href="/about">About</a></li>
 						<li class="<%if(path === "contact"){%>active<%}%>"><a href="/contact">Contact</a></li>
+						<%if(!isLoggedIn){%>
 						<li class="<%if(path === "login"){%>active<%}%>"><a href="/auth/login">Login</a></li>
+						<%}%>
 						<li  class="<%if(path === "signup") {%> active<%}%>">
 							<a href=<% if(isLoggedIn){%>"/auth/logout"> Log Out <%}else {%>"/auth/signup" >Sign Up <%}%></a>
 						</li>
