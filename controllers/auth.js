@@ -26,7 +26,7 @@ exports.postLogin = (req,res,next)=>{
                 req.session.email = email;
                 req.session.password = password;
                 if(result === 'logInButCompleteTheProfileFirst') {
-                    res.redirect('/edit-profile');
+                    res.redirect('/first-step');
                     return;
                 }
                 else {

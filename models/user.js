@@ -49,5 +49,45 @@ module.exports = class User {
             .catch(err => console.log(err));
     }
 
+    static GetNewUserData(username){
+        return db.execute('select * ' +
+            'from onlyregistered ' +
+            ' where EmailID = '+"'" + username+"'")
+            .then(([result,tableDef])=>{
+                return result;
+            })
+            .catch(err => console.log(err));
+    }
 
+    static update(email,obj,option) {
+        console.log(obj);
+    }
 };
+/*db.execute('update fullyregistered set ' +
+            'Occupation = ?' +
+            'Citizenship = ? ' +
+            'Address = ? ' +
+            'Income = ? ' +
+            'City = ? ' +
+            'Age = ? ' +
+            'Interest = ? ' +
+            'AboutMySelf = ? ' +
+            'Complexion = ? ' +
+            'Smoke = ? ' +
+            'Drink = ? ' +
+            'Weight = ? ' +
+            'Height = ? ' +
+            'Expectations = ? ' +
+            'MotherTongue = ? ' +
+            'Religion = ? ' +
+            'MartialStatus = ? ' +
+            'ChildrenStatus = ? ' +
+            'HigherEducation = ? ' +
+            'SecondaryEducation = ? ' +
+            'CollegeDegree = ? ' +
+            'FatherOccupation = ? ' +
+            'MotherOccupation = ? ' +
+            'Brothers = ? ' +
+            'Sisters = ? ' +
+            'FamilyType = ?',)
+    }*/

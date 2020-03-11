@@ -1,13 +1,14 @@
 const User = require('./../models/user');
 const db = require('./../util/database');
+
 exports.getHomepage = (req,res,next)=>{
     User.login(req.session.email,req.session.password)
         .then(result => {
             if(result == 'logInButCompleteTheProfileFirst')
-                res.redirect('/edit-profile');
+                res.redirect('/first-step');
             else
                 res.render('index',{
-                    pageTitle: "HomePage",
+                    pageTitle: "Wedding — Explore new era of Wedding planner",
                     path: "homepage",
                     isLoggedIn: req.session.isLoggedIn
                 });
@@ -15,11 +16,12 @@ exports.getHomepage = (req,res,next)=>{
         })
         .catch(err=>{console.log(err)});
 };
+
 exports.getAboutpage = (req,res,next)=>{
     User.login(req.session.email,req.session.password)
         .then(result => {
             if(result == 'logInButCompleteTheProfileFirst')
-                res.redirect('/edit-profile');
+                res.redirect('/first-step');
             else
                 res.render('about',{
                     pageTitle: "About",
@@ -30,29 +32,16 @@ exports.getAboutpage = (req,res,next)=>{
         })
         .catch(err=>{console.log(err)});
 };
+
 exports.getServicespage = (req,res,next)=>{
     User.login(req.session.email,req.session.password)
         .then(result => {
             if(result == 'logInButCompleteTheProfileFirst')
-                res.redirect('/edit-profile');
+                res.redirect('/first-step');
             else
                 res.render('services',{
                     pageTitle: "ServicesPage",
                     path: "services",
-                    isLoggedIn: req.session.isLoggedIn
-                });
-        })
-        .catch(err=>{console.log(err)});
-};
-exports.getGalleryPage = (req,res,next)=>{
-    User.login(req.session.email,req.session.password)
-        .then(result => {
-            if(result == 'logInButCompleteTheProfileFirst')
-                res.redirect('/edit-profile');
-            else
-                res.render('gallery',{
-                    pageTitle: "GalleryPage",
-                    path: "gallery",
                     isLoggedIn: req.session.isLoggedIn
                 });
         })
@@ -63,7 +52,7 @@ exports.getContactpage = (req,res,next)=>{
     User.login(req.session.email,req.session.password)
         .then(result => {
             if(result == 'logInButCompleteTheProfileFirst')
-                res.redirect('/edit-profile');
+                res.redirect('/first-step');
             else
                 res.render('contact',{
                     pageTitle: "ContactPage",
@@ -92,12 +81,18 @@ exports.getEdit = (req,res)=>{
         User.edit(email)
             .then(result=>{
                 if(result.length===0){
-                    res.render('edit-profile',{
-                        pageTitle: "Fill Proile Data",
-                        path: 'complete-profile',
-                        userData: null,
-                        isLoggedIn: req.session.isLoggedIn
-                    });
+                    User.newUserData()
+                        .then(result =>{
+                            res.render('first-step',{
+                                pageTitle: "Complete The Proile Data",
+                                path: 'complete-profile',
+                                userData: null,
+                                newUserData: result[0],
+                                isLoggedIn: req.session.isLoggedIn
+                            });
+
+                        })
+                        .catch(err => console.log(err));
                 }else{
                     const availableDataOfUser = result[0];
                     res.render('edit-profile',{
@@ -112,4 +107,51 @@ exports.getEdit = (req,res)=>{
     }else {
         res.redirect('/auth/login');
     }
+};
+
+exports.getFirstStep = (req,res)=>{
+    const isLoggedIn = req.session.isLoggedIn;
+    if(!isLoggedIn){
+        res.redirect('/auth/login');
+        return;
+    }
+    const email = req.session.email;
+    User.GetNewUserData(email)
+        .then(result=>{
+            console.log(result);
+            res.render('first-step',{
+                pageTitle: "Complete The Proile Data",
+                path: 'complete-profile',
+                userData: null,
+                newUserData: result[0],
+                isLoggedIn: req.session.isLoggedIn
+            });
+        })
+        .catch(err => console.log(err));
+};
+
+exports.postFirstStep = (req,res)=>{
+    const isLoggedIn = req.session.isLoggedIn;
+    if(!isLoggedIn){
+        res.redirect('/auth/login');
+        return;
+    }
+    const email = req.session.email;
+    User.GetNewUserData(email)
+        .then(result=>{
+            updatedData = req.body;
+            updatedData.Income = Number(updatedData.Income);
+            updatedData.Age = Math.floor(Date.now() / (1000*60*60*24*365) -  (result[0].AgeYear - 1970));
+            updatedData.ChildrenStatus = Number(updatedData.ChildrenStatus);
+            updatedData.Sisters = Number(updatedData.Sisters);
+            updatedData.Brothers = Number(updatedData.Brothers);
+            console.log(updatedData)
+            if(!(updatedData.Income && updatedData.Age && updatedData.ChildrenStatus && updatedData.Sisters && updatedData.Brothers)){
+                User.update(email,updatedData,'first-step')
+                res.redirect('/');
+            }else {
+                res.redirect('/first-step');
+            }
+        })
+        .catch(err => console.log(err));
 };

@@ -1,43 +1,6 @@
 ------------------------------------------------------------------------------------------------------------
 Authentication process is done, 
-for testing purpose you are required to insert the data manually into the tables for now
-
-
-edit-profile page is needed to be updated
-the fields in edit-profile page should be the following
-        EmailID,
-	MobileNO,
-	FirstName,
-	LastName,
-	AgeDate,
-	AgeMonth,
-	AgeYear,
-	Gender,
-        Occupation,
-	Income,
-	Address,
-	Interest,
-	Citizenship,
-	City char(20),
-	Age integer(2),
-	AboutMyself,
-	Complexion,
-	Height,
-	Weight,
-	Expectations,
-	MartialStatus,
-	ChildrenStatus,
-	Smoke,
-	Drink,
-	Education,
-	Caste,
-	MotherTongue,
-	FatherOccupation,
-	MotherOccupation,
-	Sisters,
-	Brothers,
-	FamilyType
-
+for testing purpose you will be required create dummy user manually into the tables for now
 
 ------------------------------------------------------------------------------------------------------------
 install mysql and run these queries
@@ -65,8 +28,6 @@ create table onlyregistered(
 	foreign key(EmailID) references  credentials(EmailID) on delete cascade, 
 	foreign key(MobileNO) references credentials(MobileNO) on delete cascade
 );
-
-
 
 create table fullyregistered(
 	MemberID integer(10) primary key not null,
@@ -96,5 +57,28 @@ create table fullyregistered(
 	FamilyType char(20),
 	foreign key(MemberID) references credentials(MemberID) on delete cascade
 );
+
+
+
+
+
+alter table fullyregistered rename column Education to HigherEducation;
+
+alter table fullyregistered add column SecondaryEducation char(100) NULL ;
+
+alter table fullyregistered add column CollegeDegree char(100) NULL ;
+
+alter table fullyregistered rename column Caste to Religion;
+
+alter table fullyregistered modify Expectations char(60) not null;
+
+alter table fullyregistered modify MotherTongue char(15) not null;
+
+alter table onlyregistered add foreign key (MobileNO) references credentials(MobileNO) on delete cascade on update cascade;
+
+alter table onlyregistered add foreign key (EmailID) references credentials(EmailID) on delete cascade on update cascade;
+
+alter table onlyregistered add foreign key (MemberID) references credentials(MemberID) on delete cascade on update cascade;
+
 
 -------------------------------------------------------------------------------------------------------------
