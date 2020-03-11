@@ -94,7 +94,7 @@ exports.getEdit = (req,res)=>{
                 if(result.length===0){
                     res.render('edit-profile',{
                         pageTitle: "Fill Proile Data",
-                        path: 'edit-profile',
+                        path: 'complete-profile',
                         userData: null,
                         isLoggedIn: req.session.isLoggedIn
                     });

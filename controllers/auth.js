@@ -5,7 +5,7 @@ exports.getLogin = (req,res,next)=>{
     if(!isLoggedIn) {
         res.render('auth/login', {
             pageTitle: "Login",
-            path: '/login',
+            path: 'login',
             isLoggedIn: isLoggedIn
         });
     }else{

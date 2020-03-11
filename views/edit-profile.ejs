@@ -25,8 +25,20 @@
                 <div class="wrapper wrapper--w680">
                     <div class="card card-4">
                         <div class="card-body">
-                            <h2 class="title">Register For Free</h2>
+                            <% if(path === "edit-profile"){%>
+                                <h2 class="title">Edit Profile</h2>
+                            <%}else {%>
+                                    <h2 class="title"> Please Complete Your Details to go further</h2>
+                            <%}%>
                             <form method="POST">
+
+                                <hr>
+                                <br>
+                                <div class="input-group">
+                                    <div style="text-align: center;">
+                                        <label class="label"><strong>Personal Details</strong>></label>
+                                    </div>
+                                </div>
                                 <div class="row row-space">
                                     <div class="col-2">
                                         <div class="input-group">
@@ -83,6 +95,13 @@
                                     </div>
                                 </div>
                                 <div class="row row-space input-group">
+
+                                    <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">Occupation</label>
+                                            <input class="input--style-4" type="text" name="Occupation">
+                                        </div>
+                                    </div>
                                     <label class="label">Citizenship</label>
                                     <div class="rs-select2 js-select-simple select--no-search">
                                         <select name="subject">
@@ -93,11 +112,53 @@
                                         </select>
                                         <div class="select-dropdown"></div>
                                     </div>
+                                </div>
+                                <div class="row row-space">
                                     <div class="col-2">
                                         <div class="input-group">
-                                            <label class="label">Occupation</label>
-                                            <input class="input--style-4" type="text" name="Occupation">
+                                            <label class="label">Address</label>
+                                            <input class="input--style-4" type="text" name="Address">
                                         </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">Income</label>
+                                            <input class="input--style-4" type="text" required name="Income">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">City</label>
+                                            <input class="input--style-4" type="text" required name="City">
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">Interest</label>
+                                            <input class="input--style-4" type="text" name="Interest">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">About Myself</label>
+                                            <input class="input--style-4" type="text" required name="AboutMyself">
+                                        </div>
+                                    </div>
+                                    <label class="label">Complexion</label>
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                        <select name="subject">
+                                            <option disabled="disabled" selected="selected">Light Skin</option>
+                                            <option>Fair Skin</option>
+                                            <option>Medium Skin</option>
+                                            <option>Olive Skin</option>
+                                            <option>Tan Brown Skin</option>
+                                            <option>Black Brown Skin</option>
+                                        </select>
+                                        <div class="select-dropdown"></div>
                                     </div>
                                 </div>
                                 <div class="row row-space">
@@ -133,117 +194,149 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-2">
-                                    <div class="input-group">
-                                        <label class="label">Caste</label>
-                                        <input class="input--style-4" type="text" name="Caste">
-                                    </div>
-                                </div>
                                 <div class="row row-space">
                                     <div class="col-2">
                                         <div class="input-group">
-                                            <label class="label">fathers occupation</label>
-                                            <input class="input--style-4" type="text" name="first_name">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="input-group">
-                                            <label class="label">mothers occupation</label>
-                                            <input class="input--style-4" type="text" name="first_name">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row row-space">
-                                    <div class="col-2">
-                                        <div class="input-group">
-                                            <label class="label">Mother tongue</label>
-                                            <input class="input--style-4" type="text" name="first_name">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-2">
-                                        <div class="input-group">
-                                            <label class="label">Siblings</label>
-                                            <input class="input--style-4" type="text" name="first_name">
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="row row-space">
-                                    <div class="col-2">
-                                        <div class="input-group">
-                                            <label class="label">Age</label>
-                                            <input class="input--style-4" type="text" name="first_name">
+                                            <label class="label">Weight</label>
+                                            <input class="input--style-4" type="text" name="Weight">
                                         </div>
                                     </div>
 
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">Height</label>
-                                            <input class="input--style-4" type="text" name="first_name">
+                                            <input class="input--style-4" type="text" name="Height">
                                         </div>
                                     </div>
                                 </div>
-
-
-                                <div class="input-group">
-                                    <center>
-                                        <label class="label">Educational Details</label>
-                                    </center>
-                                </div>
-
                                 <div class="row row-space">
                                     <div class="col-2">
                                         <div class="input-group">
-                                            <label class="label">Primary schooling</label>
-                                            <input class="input--style-4" rows="2" type="text" name="first_name">
+                                            <label class="label">Expectations</label>
+                                            <input class="input--style-4" type="text" required name="Expectations">
                                         </div>
                                     </div>
-
                                     <div class="col-2">
                                         <div class="input-group">
-                                            <label class="label">Secondary schooling</label>
-                                            <input class="input--style-4" type="text" name="first_name">
+                                            <label class="label">Mother Tongue</label>
+                                            <input class="input--style-4" type="text" required name="MotherTongue">
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="row row-space">
-                                    <div class="col-2">
-                                        <div class="input-group">
-                                            <label class="label">Higher Sceondary</label>
-                                            <input class="input--style-4" type="text" name="first_name">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-2">
-                                        <div class="input-group">
-                                            <label class="label">College</label>
-                                            <input class="input--style-4" type="text" name="first_name">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row row-space input-group">
-                                    <label class="label">Family Type</label>
+                                    <label class="label">Religion</label>
                                     <div class="rs-select2 js-select-simple select--no-search">
-                                        <select name="subject">
-                                            <option disabled="disabled" selected="selected">Indian</option>
-                                            <option>UK</option>
-                                            <option>USA</option>
-                                            <option>Other</option>
+                                        <select name="Religion">
+                                            <option disabled="disabled" selected="selected">Hindu</option>
+                                            <option>Muslim</option>
+                                            <option>Cristian</option>
+                                            <option>Sikh</option>
+                                            <option>Jain</option>
+                                            <option>Buddha</option>
                                         </select>
                                         <div class="select-dropdown"></div>
                                     </div>
+                                    <label class="label">Martial Status</label>
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                        <select name="Martial Status">
+                                            <option disabled="disabled" selected="selected">Single</option>
+                                            <option>Married</option>
+                                            <option>Widowed</option>
+                                            <option>Divorced</option>
+                                            <option>Separated</option>
+                                        </select>
+                                        <div class="select-dropdown"></div>
+                                    </div>
+
+                                </div>
+                                <div class="row row-space">
                                     <div class="col-2">
                                         <div class="input-group">
-                                            <label class="label">Occupation</label>
-                                            <input class="input--style-4" type="text" name="Occupation">
+                                            <label class="label">Any Child?</label>
+                                            <input class="input--style-4" type="text" required name="ChildrenStatus">
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
+                                <br>
+                                <div class="input-group">
+                                    <div style="text-align: center;">
+                                        <label class="label"><strong>Educational Details</strong>></label>
+                                    </div>
+                                </div>
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">Higher Education (10)</label>
+                                            <input class="input--style-4" rows="2" type="text" name="HigherEducation">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">Secondary Secondary (10+2)</label>
+                                            <input class="input--style-4" type="text" name="SecondaryEducation">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">College Degree</label>
+                                            <input class="input--style-4" type="text" name="CollegeDegree">
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr><br>
+                                <div class="input-group">
+                                    <div style="text-align: center;">
+                                        <label class="label"><strong>Family Details</strong></label>
+                                    </div>
+                                </div>
+
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">Father Occupation</label>
+                                            <input class="input--style-4" type="text" name="FatherOccupation">
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">Mothers Occupation</label>
+                                            <input class="input--style-4" type="text" name="MotherOccupation">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">Brothers</label>
+                                            <input class="input--style-4" type="text" name="Brothers">
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">Sisters</label>
+                                            <input class="input--style-4" type="text" name="Sisters">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row row-space input-group">
+                                    <label class="label">Family Type</label>
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                        <select name="FamilyType">
+                                            <option disabled="disabled" selected="selected">Nuclear Family</option>
+                                            <option>Joint Family</option>
+                                            <option>Step Family</option>
+                                            <option>Grand Parent Family</option>
+                                        </select>
+                                        <div class="select-dropdown"></div>
+                                    </div>
+                                </div>
+
 
 
 
@@ -259,7 +352,13 @@
         </div>
     </header>
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><<br><br>
+    <br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br>
     <%- include('./includes/footer.ejs')%>
 
 
