@@ -22,7 +22,7 @@
                                 <br>
                                 <div class="input-group">
                                     <div style="text-align: center;">
-                                        <label class="label"><strong>Personal Details</strong>></label>
+                                        <label class="label"><strong>Personal Details</strong></label>
                                     </div>
                                 </div>
                                 <div class="row row-space">
@@ -55,11 +55,11 @@
                                             <label class="label">Gender</label>
                                             <div class="p-t-10">
                                                 <label class="radio-container m-r-45">Male
-                                                    <input type="radio" name="Gender" <%if(userData.Gender ==='M'){%> checked <%}%> >
+                                                    <input type="radio" name="Gender" <%if(userData.Gender ==='M'){%> checked <%}%> value="M" >
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 <label class="radio-container">Female
-                                                    <input type="radio" name="Gender" <%if(userData.Gender ==='F'){%> checked <%}%>>
+                                                    <input type="radio" name="Gender" <%if(userData.Gender ==='F'){%> checked <%}%> value="F">
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </div>
@@ -70,13 +70,14 @@
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">Email</label>
-                                            <input class="input--style-4" type="email" required name="email" value="<%if(userData.EmailID){%> <%= userData.EmailID %> <%}%>" >
+                                            <input hidden value="<%if(userData.EmailID){%> <%= userData.EmailID %> <%}%>" name="EmailID" >
+                                            <input class="input--style-4" type="email" disabled required name="email" value="<%if(userData.EmailID){%> <%= userData.EmailID %> <%}%>" >
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">Mobile Number</label>
-                                            <input class="input--style-4" type="text" name="phone" value="<%if(userData.MobileNO){%> <%= userData.MobileNO %> <%}%>" >
+                                            <input class="input--style-4" type="text" disabled name="phone" value="<%if(userData.MobileNO){%> <%= userData.MobileNO %> <%}%>" >
                                         </div>
                                     </div>
                                 </div>
@@ -136,7 +137,7 @@
                                     </div>
                                     <label class="label">Complexion</label>
                                     <div class="rs-select2 js-select-simple select--no-search">
-                                        <select name="subject">
+                                        <select name="Complexion">
                                             <option <%if(userData.Complexion === 'Light Skin'){%> selected <%}%> >Light Skin</option>
                                             <option <%if(userData.Complexion === 'Fair Skin'){%> selected <%}%> >Fair Skin</option>
                                             <option <%if(userData.Complexion === 'Medium Skin'){%> selected <%}%> >Medium Skin</option>
@@ -150,14 +151,14 @@
                                 <div class="row row-space">
                                     <div class="col-2">
                                         <div class="input-group">
-                                            <label class="label">smoke</label>
+                                            <label class="label">Smoke</label>
                                             <div class="p-t-10">
                                                 <label class="radio-container m-r-45">Yes
-                                                    <input type="radio" name="Smoke" <%if(userData.Smoke ==='Yes'){%> checked <%}%> >
+                                                    <input type="radio" name="Smoke" <%if(userData.Smoke ==='Yes'){%> checked <%}%> value="Yes">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 <label class="radio-container">No
-                                                    <input type="radio" name="Smoke" <%if(userData.Gender ==='No'){%> checked <%}%> >
+                                                    <input type="radio" name="Smoke" <%if(userData.Smoke ==='No'){%> checked <%}%> value="No">
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </div>
@@ -169,11 +170,11 @@
                                             <label class="label">Drink</label>
                                             <div class="p-t-10">
                                                 <label class="radio-container m-r-45">Yes
-                                                    <input type="radio" name="Drink" <%if(userData.Gender ==='Yes'){%> checked <%}%> >
+                                                    <input type="radio" name="Drink" <%if(userData.Drink ==='Yes'){%> checked <%}%> value="Yes">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 <label class="radio-container">No
-                                                    <input type="radio" name="Drink" <%if(userData.Gender ==='No'){%> checked <%}%> >
+                                                    <input type="radio" name="Drink" <%if(userData.Drink ==='No'){%> checked <%}%> value="No">
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </div>
@@ -213,18 +214,18 @@
                                     <label class="label">Religion</label>
                                     <div class="rs-select2 js-select-simple select--no-search">
                                         <select name="Religion">
-                                            <option <%if(userData.Caste === 'Hindu'){%> selected <%}%> >Hindu</option>
-                                            <option <%if(userData.Caste === 'Muslim'){%> selected <%}%> >Muslim</option>
-                                            <option <%if(userData.Caste === 'Christian'){%> selected <%}%> >Christian</option>
-                                            <option <%if(userData.Caste === 'Sikh'){%> selected <%}%> >Sikh</option>
-                                            <option <%if(userData.Caste === 'Jain'){%> selected <%}%> >Jain</option>
-                                            <option <%if(userData.Caste === 'Buddha'){%> selected <%}%> >Buddha</option>
+                                            <option <%if(userData.Religion === 'Hindu'){%> selected <%}%> >Hindu</option>
+                                            <option <%if(userData.Religion === 'Muslim'){%> selected <%}%> >Muslim</option>
+                                            <option <%if(userData.Religion === 'Christian'){%> selected <%}%> >Christian</option>
+                                            <option <%if(userData.Religion === 'Sikh'){%> selected <%}%> >Sikh</option>
+                                            <option <%if(userData.Religion === 'Jain'){%> selected <%}%> >Jain</option>
+                                            <option <%if(userData.Religion === 'Buddha'){%> selected <%}%> >Buddha</option>
                                         </select>
                                         <div class="select-dropdown"></div>
                                     </div>
                                     <label class="label">Martial Status</label>
                                     <div class="rs-select2 js-select-simple select--no-search">
-                                        <select name="Martial Status">
+                                        <select name="MartialStatus">
                                             <option <%if(userData.MartialStatus === 'Single'){%> selected <%}%> >Single</option>
                                             <option <%if(userData.MartialStatus === 'Married'){%> selected <%}%> >Married</option>
                                             <option <%if(userData.MartialStatus === 'Widowed'){%> selected <%}%> >Widowed</option>
@@ -239,7 +240,7 @@
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">Any Child?</label>
-                                            <input class="input--style-4" type="text" required name="ChildrenStatus" value="<%if(userData.ChildrenStatus){%> <%=userData.ChildrenStatus%> <%}%>">
+                                            <input class="input--style-4" type="text" required name="ChildrenStatus" value="<%if(typeof userData.ChildrenStatus === "number"){%> <%=userData.ChildrenStatus%> <%}%>">
                                         </div>
                                     </div>
                                 </div>
@@ -247,7 +248,7 @@
                                 <br>
                                 <div class="input-group">
                                     <div style="text-align: center;">
-                                        <label class="label"><strong>Educational Details</strong>></label>
+                                        <label class="label"><strong>Educational Details</strong></label>
                                     </div>
                                 </div>
                                 <div class="row row-space">

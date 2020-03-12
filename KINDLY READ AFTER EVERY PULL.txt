@@ -80,5 +80,6 @@ alter table onlyregistered add foreign key (EmailID) references credentials(Emai
 
 alter table onlyregistered add foreign key (MemberID) references credentials(MemberID) on delete cascade on update cascade;
 
+alter table fullyregistered drop Age;
 
 -------------------------------------------------------------------------------------------------------------

@@ -2,7 +2,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-2">
-					<div id="fh5co-logo"><a href="index.html">YP<strong>.</strong></a></div>
+					<div id="fh5co-logo"><a href="/">YP<strong>.</strong></a></div>
 				</div>
 				<div class="col-xs-10 text-right menu-1">
 					<ul>
@@ -21,12 +21,23 @@
 						<%if(!isLoggedIn){%>
 						<li class="<%if(path === "login"){%>active<%}%>"><a href="/auth/login">Login</a></li>
 						<%}%>
-						<li  class="<%if(path === "signup") {%> active<%}%>">
+						<li  class="<%if(path === "signup") {%>active<%}%>">
 							<a href=<% if(isLoggedIn){%>"/auth/logout"> Log Out <%}else {%>"/auth/signup" >Sign Up <%}%></a>
+						</li>
+						<%if(isLoggedIn){%>
+						<li class="has-dropdown">
+							<a href="/"><img height="30" src="/images/userLoggedIn.png"></a>
+							<ul class="dropdown">
+								<li><a href="#">Search Profile</a></li>
+								<li><a href="/edit-profile">Edit Profile</a></li>
+							</ul>
+						</li>
+						<%}%>
+						<li>
+
 						</li>
 					</ul>
 				</div>
 			</div>
-			
 		</div>
 	</nav>

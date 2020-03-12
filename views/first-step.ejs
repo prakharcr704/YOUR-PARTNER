@@ -28,7 +28,7 @@
                             <% if(path === "edit-profile"){%>
                                 <h2 class="title">Edit Profile</h2>
                             <%}else {%>
-                                <h2 class="title"> Please Complete Your Details to go further</h2>
+                                <h2 class="title"> Please Comlete Your Details to go further</h2>
                             <%}%>
                             <form method="POST" action="/first-step">
 
@@ -36,20 +36,20 @@
                                 <br>
                                 <div class="input-group">
                                     <div style="text-align: center;">
-                                        <label class="label"><strong>Personal Details</strong>></label>
+                                        <label class="label"><strong>Personal Details</strong></label>
                                     </div>
                                 </div>
                                 <div class="row row-space">
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">First name</label>
-                                            <input class="input--style-4" type="text" disabled name="FirstName" value="<%= newUserData.FirstName%>">
+                                            <input class="input--style-4" type="text" name="FirstName" disabled value="<% if(newUserData.FirstName){%><%=newUserData.FirstName%><%}%>" >
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">Last name</label>
-                                            <input class="input--style-4" type="text" disabled name="LastName" value="<%= newUserData.LastName%>">
+                                            <input class="input--style-4" type="text" name="LastName" disabled value="<% if(newUserData.LastName){%><%=newUserData.LastName%><%}%>" >
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                         <div class="input-group">
                                             <label class="label">Date of Birth</label>
                                             <div class="input-group-icon">
-                                                <input class="input--style-4 js-datepicker" disabled type="text" name="DOB" value="<%= newUserData.AgeDate+'/'+newUserData.AgeMonth+'/'+newUserData.AgeYear %>">
+                                                <input class="input--style-4 js-datepicker" type="text" name="DOB" disabled value="<% if(newUserData.AgeDate){%><%=newUserData.AgeDate+'/'+newUserData.AgeMonth+'/'+newUserData.AgeYear%><%}%>" >
                                                 <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                             </div>
                                         </div>
@@ -69,11 +69,11 @@
                                             <label class="label">Gender</label>
                                             <div class="p-t-10">
                                                 <label class="radio-container m-r-45">Male
-                                                    <input type="radio" name="Gender" disabled value="M" <% if(newUserData.Gender ==='M'){%>checked<%}%>  >
+                                                    <input type="radio" disabled <% if(newUserData.Gender === 'M'){%> checked <%}%>  name="Gender">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 <label class="radio-container">Female
-                                                    <input type="radio" name="Gender" disabled value="F" <% if(newUserData.Gender ==='F'){%>checked<%}%>
+                                                    <input type="radio" name="Gender" disabled <% if(newUserData.Gender === 'F'){%> checked <%}%>>
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </div>
@@ -84,13 +84,13 @@
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">Email</label>
-                                            <input class="input--style-4" type="email" required name="email" disabled value="<%= newUserData.EmailID%>" >
+                                            <input class="input--style-4" type="email" required disabled name="EmailID" value="<%if(newUserData.EmailID){%><%=newUserData.EmailID%><%}%>">
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">Mobile Number</label>
-                                            <input class="input--style-4" type="text" disabled value="<%= newUserData.MobileNO %>" name="phone">
+                                            <input class="input--style-4" type="text" name="MobileNO" disabled value="<%if(newUserData.MobileNO){%><%=newUserData.MobileNO %><%}%>">
                                         </div>
                                     </div>
                                 </div>
@@ -104,11 +104,11 @@
                                     </div>
                                     <label class="label">Citizenship</label>
                                     <div class="rs-select2 js-select-simple select--no-search">
-                                        <select name="Citizenship" required>
-                                            <option name="Citizenship" selected="selected">Indian</option>
-                                            <option name="Citizenship" >UK</option>
-                                            <option name="Citizenship" >USA</option>
-                                            <option name="Citizenship" >Other</option>
+                                        <select name="Citizenship">
+                                            <option selected="selected">Indian</option>
+                                            <option >UK</option>
+                                            <option >USA</option>
+                                            <option >Other</option>
                                         </select>
                                         <div class="select-dropdown"></div>
                                     </div>
@@ -145,18 +145,18 @@
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">About Myself</label>
-                                            <input class="input--style-4" type="text"  name="AboutMyself">
+                                            <input class="input--style-4" type="text" required name="AboutMyself">
                                         </div>
                                     </div>
                                     <label class="label">Complexion</label>
                                     <div class="rs-select2 js-select-simple select--no-search">
                                         <select name="Complexion">
-                                            <option name="Complexion" >Light Skin</option>
-                                            <option name="Complexion" >Fair Skin</option>
-                                            <option name="Complexion" >Medium Skin</option>
-                                            <option name="Complexion" >Olive Skin</option>
-                                            <option name="Complexion" >Tan Brown Skin</option>
-                                            <option name="Complexion" >Black Brown Skin</option>
+                                            <option selected="selected">Light Skin</option>
+                                            <option>Fair Skin</option>
+                                            <option>Medium Skin</option>
+                                            <option>Olive Skin</option>
+                                            <option>Tan Brown Skin</option>
+                                            <option>Black Brown Skin</option>
                                         </select>
                                         <div class="select-dropdown"></div>
                                     </div>
@@ -167,11 +167,11 @@
                                             <label class="label">smoke</label>
                                             <div class="p-t-10">
                                                 <label class="radio-container m-r-45">Yes
-                                                    <input type="radio" checked="checked" name="Smoke">
+                                                    <input type="radio" checked="checked" name="Smoke" value="Yes">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 <label class="radio-container">No
-                                                    <input type="radio" name="Smoke">
+                                                    <input type="radio" name="Smoke" value="No">
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </div>
@@ -183,11 +183,11 @@
                                             <label class="label">Drink</label>
                                             <div class="p-t-10">
                                                 <label class="radio-container m-r-45">Yes
-                                                    <input type="radio" checked="checked" name="Drink">
+                                                    <input type="radio" checked="checked" name="Drink" value="Yes">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 <label class="radio-container">No
-                                                    <input type="radio" name="Drink">
+                                                    <input type="radio" name="Drink" value="No">
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </div>
@@ -205,7 +205,7 @@
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">Height</label>
-                                            <input class="input--style-4" required type="text" name="Height">
+                                            <input class="input--style-4" type="text" name="Height">
                                         </div>
                                     </div>
                                 </div>
@@ -227,23 +227,23 @@
                                     <label class="label">Religion</label>
                                     <div class="rs-select2 js-select-simple select--no-search">
                                         <select name="Religion">
-                                            <option  name="Religion"  selected="selected">Hindu</option>
-                                            <option name="Religion"  >Muslim</option>
-                                            <option name="Religion"  >Cristian</option>
-                                            <option name="Religion"  >Sikh</option>
-                                            <option name="Religion"  >Jain</option>
-                                            <option name="Religion" >Buddha</option>
+                                            <option selected="selected">Hindu</option>
+                                            <option>Muslim</option>
+                                            <option>Cristian</option>
+                                            <option>Sikh</option>
+                                            <option>Jain</option>
+                                            <option>Buddha</option>
                                         </select>
                                         <div class="select-dropdown"></div>
                                     </div>
                                     <label class="label">Martial Status</label>
                                     <div class="rs-select2 js-select-simple select--no-search">
-                                        <select name="MartialStatus" required>
-                                            <option name="MartialStatus" selected="selected">Single</option>
-                                            <option name="MartialStatus">Married</option>
-                                            <option name="MartialStatus">Widowed</option>
-                                            <option name="MartialStatus">Divorced</option>
-                                            <option name="MartialStatus">Separated</option>
+                                        <select name="MartialStatus">
+                                            <option selected="selected">Single</option>
+                                            <option>Married</option>
+                                            <option>Widowed</option>
+                                            <option>Divorced</option>
+                                            <option>Separated</option>
                                         </select>
                                         <div class="select-dropdown"></div>
                                     </div>
@@ -328,10 +328,10 @@
                                     <label class="label">Family Type</label>
                                     <div class="rs-select2 js-select-simple select--no-search">
                                         <select name="FamilyType">
-                                            <option name="FamilyType" selected="selected">Nuclear Family</option>
-                                            <option name="FamilyType" >Joint Family</option>
-                                            <option name="FamilyType" >Step Family</option>
-                                            <option name="FamilyType" >Grand Parent Family</option>
+                                            <option selected="selected">Nuclear Family</option>
+                                            <option>Joint Family</option>
+                                            <option>Step Family</option>
+                                            <option>Grand Parent Family</option>
                                         </select>
                                         <div class="select-dropdown"></div>
                                     </div>
