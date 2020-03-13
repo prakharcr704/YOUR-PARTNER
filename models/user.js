@@ -113,10 +113,10 @@ module.exports = class User {
                                 '","' +results[0].MobileNO +
                                 '",' +  (  obj.FirstName?('"' + obj.FirstName + '"'):'NULL' ) +
                                 ',' +  (  obj.LastName?('"' + obj.LastName + '"'):'NULL' ) +
-                                ',' +  (  typeof(Number( obj.DOB.split('/')[0])) === "number"?( obj.DOB.split('/')[0] ):'NULL' ) +
-                                ',' +  (  typeof(Number( obj.DOB.split('/')[1])) === "number"?( obj.DOB.split('/')[1] ):'NULL' ) +
-                                ',' +  (  typeof(Number( obj.DOB.split('/')[2])) === "number"?( obj.DOB.split('/')[2] ):'NULL' ) +
-                                ',' +  (  obj.CollegeDegree?('"' + obj.CollegeDegree + '")'):'NULL)')
+                                ',' +  (  typeof(Number( obj.DOB.split('/')[0])) === "number"?( Number( obj.DOB.split('/')[0]) ):'NULL' ) +
+                                ',' +  (  typeof(Number( obj.DOB.split('/')[1])) === "number"?( Number( obj.DOB.split('/')[1]) ):'NULL' ) +
+                                ',' +  (  typeof(Number( obj.DOB.split('/')[2])) === "number"?( Number( obj.DOB.split('/')[2]) ):'NULL' ) +
+                                ',' +  (  obj.Gender?('"' + obj.Gender + '")'):'NULL)')
                             )
                         })
                         .catch(err => console.log(err));

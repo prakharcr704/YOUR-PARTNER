@@ -80,6 +80,8 @@ exports.getEdit = (req,res)=>{
                 if(result.length===0){
                     User.GetNewUserData(email)
                         .then(result =>{
+                            console.log(result)
+
                             res.redirect('/first-step')
                         })
                         .catch(err => console.log(err))
@@ -107,6 +109,7 @@ exports.postEdit = (req,res)=>{
     }
     const email = req.session.email;
     updatedData = req.body;
+    console.log(updatedData)
     for(key in updatedData){
         updatedData[key] = updatedData[key].trim();
     }
@@ -122,6 +125,7 @@ exports.postEdit = (req,res)=>{
         updatedData.Sisters = Number(updatedData.Sisters);
     if(updatedData.Brothers)
         updatedData.Brothers = Number(updatedData.Brothers);
+    console.log(updatedData)
     if(((typeof updatedData.Income === "number")  && (typeof updatedData.ChildrenStatus === "number") && (typeof updatedData.Sisters === "number")&& (typeof updatedData.Brothers === "number"))){
         User.update(email,updatedData,'edit-profile')
             .then(result=>{
@@ -135,7 +139,6 @@ exports.postEdit = (req,res)=>{
         res.redirect('/first-step');
     }
 };
-
 
 exports.getFirstStep = (req,res)=>{
     const isLoggedIn = req.session.isLoggedIn;
@@ -159,8 +162,9 @@ exports.getFirstStep = (req,res)=>{
                     })
                     .catch(err => console.log(err));
             }
-            else
+            else {
                 res.redirect('/');
+            }
         })
         .catch(err=>{console.log(err)});
 };
@@ -189,6 +193,7 @@ exports.postFirstStep = (req,res)=>{
     if(firstStepData.Brothers)
         firstStepData.Brothers = Number(firstStepData.Brothers.trim());
     if(((typeof firstStepData.Income === "number")  && (typeof firstStepData.ChildrenStatus === "number") && (typeof firstStepData.Sisters === "number")&& (typeof firstStepData.Brothers === "number"))){
+        console.log(firstStepData)
         User.update(email,firstStepData,'first-step')
             .then(result=>{
                 res.writeHead(200,{'Content-Type':'text/html'});
