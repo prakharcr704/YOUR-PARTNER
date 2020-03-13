@@ -1,4 +1,13 @@
 const User = require('../models/user');
+const nodemailer = require('nodemailer');
+const sendGridTransport = require('nodemailer-sendgrid-transport');
+
+const transporter = nodemailer.createTransport(sendGridTransport({
+    auth: {
+        api_key: "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"
+    }
+}));
+
 
 exports.getLogin = (req,res,next)=>{
     const isLoggedIn = req.session.isLoggedIn;
@@ -6,6 +15,7 @@ exports.getLogin = (req,res,next)=>{
         res.render('auth/login', {
             pageTitle: "Login",
             path: 'login',
+            message: false,
             isLoggedIn: isLoggedIn
         });
     }else{
@@ -34,7 +44,12 @@ exports.postLogin = (req,res,next)=>{
                     return;
                 }
             }else {
-                res.redirect('/auth/login')
+                res.render('auth/login',{
+                    pageTitle: "Login",
+                    path: 'login',
+                    message: 'Wrong Email or Password, Try Forgot Password...',
+                    isLoggedIn: false
+                });
             }
         })
         .catch(err => console.log(err));
@@ -52,8 +67,8 @@ exports.getSignUp = (req,res) => {
     if(req.session.isLoggedIn){
         res.redirect('/');
     }else{
-        res.render('signUp',{
-            pageTitle: "Fill Proile Data",
+        res.render('auth/signUp',{
+            pageTitle: "Create Profile",
             path: 'signup',
             message : undefined,
             userData: [],
@@ -69,7 +84,18 @@ exports.postSignUp = (req,res)=>{
     }
     User.signup(obj)
         .then(result => {
+
+
             res.redirect('/auth/login');
+
+            transporter.sendMail({
+                to: obj.EmailID,
+                from: 'prem@yourpartner.com',
+                subject: 'Signup Succeeded!',
+                html: '<h1>You Successfully Signed Up!</h1><hr>'+obj.EmailID,
+            })
+                .catch(err => console.log(err));
+
             return;
         })
         .catch(err => {
@@ -91,4 +117,30 @@ exports.postSignUp = (req,res)=>{
                 res.end();
             }
         });
-}
+};
+
+exports.getForgotPassword = (req,res) =>{
+    res.render('auth/resetPassword',{
+        pageTitle: "Forgot Password",
+        path: "",
+        isLoggedIn: false
+    })
+};
+
+exports.postForgotPassword = (req,res) =>{
+    res.render('auth/login',{
+        pageTitle: "Login",
+        path: 'login',
+        message: 'Check your Email to reset password',
+        isLoggedIn: false
+    });
+
+    transporter.sendMail({
+        to: req.body.EmailID,
+        from: 'prem@yourpartner.com',
+        subject: 'Reset Password!',
+        html: '<h1>Reset your password! </h1>',
+    })
+        .catch(err => console.log(err));
+
+};
