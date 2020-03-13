@@ -6,7 +6,7 @@ for testing purpose you will be required create dummy user manually into the tab
 install mysql and run these queries
 
 create database yourpartner;
-
+use yourpartner;
 create table credentials( 
 	MemberID integer(10) primary key auto_increment,
 	EmailID char(30) unique not null,

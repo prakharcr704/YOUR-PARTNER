@@ -49,6 +49,13 @@ module.exports = class User {
             .catch(err => console.log(err));
     }
 
+    static GetMobileNumber(email){
+        return db.execute('select MobileNO from credentials where EmailID =? ',[email])
+            .then(([results,tableDEF])=>{
+                return results[0].MobileNO;
+            });
+    }
+
     static GetNewUserData(username){
         return db.execute('select * ' +
             'from onlyregistered ' +
@@ -59,8 +66,8 @@ module.exports = class User {
             .catch(err => console.log(err));
     }
 
-    static getMemberID(email){
-        return db.execute('select MemberID from credentials where EmailID = ?',[email])
+    static getCredentials(email){
+        return db.execute('select MemberID,EmailID,MobileNO from credentials where EmailID = ?',[email])
             .then(results=>{
                 return results[0];
             })
@@ -68,7 +75,7 @@ module.exports = class User {
     }
 
     static update(email,obj,option) {
-        return this.getMemberID(email)
+        return this.getCredentials(email)
             .then(results=>{
                 if(option==="first-step") {
                     return db.execute('insert into fullyregistered values (' +
@@ -98,7 +105,21 @@ module.exports = class User {
                         ',' +  (  obj.FamilyType?('"' + obj.FamilyType + '"'):'NULL' ) +
                         ',' +  (  obj.SecondaryEducation?('"' + obj.SecondaryEducation + '"'):'NULL' ) +
                         ',' +  (  obj.CollegeDegree?('"' + obj.CollegeDegree + '")'):'NULL)' )
-                        );
+                        )
+                        .then(()=>{
+                            return db.execute('insert into onlyregistered values (' +
+                                ''+results[0].MemberID +
+                                ',"' + results[0].EmailID+
+                                '","' +results[0].MobileNO +
+                                '",' +  (  obj.FirstName?('"' + obj.FirstName + '"'):'NULL' ) +
+                                ',' +  (  obj.LastName?('"' + obj.LastName + '"'):'NULL' ) +
+                                ',' +  (  typeof(Number( obj.DOB.split('/')[0])) === "number"?( obj.DOB.split('/')[0] ):'NULL' ) +
+                                ',' +  (  typeof(Number( obj.DOB.split('/')[1])) === "number"?( obj.DOB.split('/')[1] ):'NULL' ) +
+                                ',' +  (  typeof(Number( obj.DOB.split('/')[2])) === "number"?( obj.DOB.split('/')[2] ):'NULL' ) +
+                                ',' +  (  obj.CollegeDegree?('"' + obj.CollegeDegree + '")'):'NULL)')
+                            )
+                        })
+                        .catch(err => console.log(err));
                 }
                 else{
                     return db.execute('update  fullyregistered  set ' +
@@ -142,6 +163,10 @@ module.exports = class User {
                 }
             })
             .catch(err => console.log(err));
+    }
+
+    static signup(obj){
+        return db.execute('insert into credentials (EmailID,MobileNO,password) values(?,?,?)',[obj.EmailID,obj.MobileNO,obj.password]);
     }
 };
 

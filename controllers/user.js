@@ -74,21 +74,13 @@ exports.getDelete =(req,res)=>{
 exports.getEdit = (req,res)=>{
     const isLoggedIn = req.session.isLoggedIn;
     const email = req.session.email;
-
     if(isLoggedIn){
         User.edit(email)
             .then(result=>{
                 if(result.length===0){
-                    User.newUserData()
+                    User.GetNewUserData(email)
                         .then(result =>{
-                            res.render('first-step',{
-                                pageTitle: "Complete The Proile Data",
-                                path: 'complete-profile',
-                                userData: null,
-                                newUserData: result[0],
-                                isLoggedIn: req.session.isLoggedIn
-                            });
-
+                            res.redirect('/first-step')
                         })
                         .catch(err => console.log(err))
                 }else{
@@ -114,41 +106,35 @@ exports.postEdit = (req,res)=>{
         return;
     }
     const email = req.session.email;
-    User.GetNewUserData(email)
-        .then(result=>{
-            updatedData = req.body;
-            for(key in updatedData){
-                updatedData[key] = updatedData[key].trim();
-            }
-            for(key in updatedData){
-                if(updatedData[key]==='')
-                    updatedData[key]=null;
-            }
-            if(updatedData.Income)
-                updatedData.Income = Number(updatedData.Income);
-            if(updatedData.ChildrenStatus)
-                updatedData.ChildrenStatus = Number(updatedData.ChildrenStatus);
-            if(updatedData.Sisters)
-                updatedData.Sisters = Number(updatedData.Sisters);
-            if(updatedData.Brothers)
-                updatedData.Brothers = Number(updatedData.Brothers);
-            if((updatedData.Income  && (typeof updatedData.ChildrenStatus === "number") && updatedData.Sisters && updatedData.Brothers)){
-                User.update(email,updatedData,'edit-profile')
-                    .then(result=>{
-                        res.redirect('/');
-                    })
-                    .catch(err => {
-                        console.log(err);
-                        res.redirect('/');
-                    });
-            }else {
-                res.redirect('/first-step');
-            }
-        })
-        .catch(err => console.log(err));
-
-}
-
+    updatedData = req.body;
+    for(key in updatedData){
+        updatedData[key] = updatedData[key].trim();
+    }
+    for(key in updatedData){
+        if(updatedData[key]==='')
+            updatedData[key]=null;
+    }
+    if(updatedData.Income)
+        updatedData.Income = Number(updatedData.Income);
+    if(updatedData.ChildrenStatus)
+        updatedData.ChildrenStatus = Number(updatedData.ChildrenStatus);
+    if(updatedData.Sisters)
+        updatedData.Sisters = Number(updatedData.Sisters);
+    if(updatedData.Brothers)
+        updatedData.Brothers = Number(updatedData.Brothers);
+    if(((typeof updatedData.Income === "number")  && (typeof updatedData.ChildrenStatus === "number") && (typeof updatedData.Sisters === "number")&& (typeof updatedData.Brothers === "number"))){
+        User.update(email,updatedData,'edit-profile')
+            .then(result=>{
+                res.redirect('/');
+            })
+            .catch(err => {
+                console.log(err);
+                res.redirect('/');
+            });
+    }else {
+        res.redirect('/first-step');
+    }
+};
 
 
 exports.getFirstStep = (req,res)=>{
@@ -161,13 +147,13 @@ exports.getFirstStep = (req,res)=>{
         .then(result => {
             if(result == 'logInButCompleteTheProfileFirst'){
                 const email = req.session.email;
-                User.GetNewUserData(email)
+                User.GetMobileNumber(email)
                     .then(result=>{
                         res.render('first-step',{
                             pageTitle: "Complete The Proile Data",
                             path: 'complete-profile',
                             userData: null,
-                            newUserData: result[0],
+                            newUserData: [result,email],
                             isLoggedIn: req.session.isLoggedIn
                         });
                     })
@@ -186,40 +172,37 @@ exports.postFirstStep = (req,res)=>{
         return;
     }
     const email = req.session.email;
-    User.GetNewUserData(email)
-        .then(result=>{
-            updatedData = req.body;
-            for(key in updatedData){
-                updatedData[key] = updatedData[key].trim();
-            }
-            for(key in updatedData){
-                if(updatedData[key] ==='')
-                    updatedData[key]=null;
-            }
-            if(updatedData.Income)
-                updatedData.Income = Number(updatedData.Income.trim());
-            if(updatedData.ChildrenStatus)
-                updatedData.ChildrenStatus = Number(updatedData.ChildrenStatus.trim());
-            if(updatedData.Sisters)
-                updatedData.Sisters = Number(updatedData.Sisters.trim());
-            if(updatedData.Brothers)
-                updatedData.Brothers = Number(updatedData.Brothers.trim());
-            if((updatedData.Income  && (typeof updatedData.ChildrenStatus === "number") && updatedData.Sisters && updatedData.Brothers)){
-                User.update(email,updatedData,'first-step')
-                    .then(result=>{
-                        res.redirect('/');
-                    })
-                    .catch(err => {
-                        console.log(err);
-                        res.redirect('/');
-                    });
-            }else {
-                res.redirect('/first-step');
-            }
-        })
-        .catch(err => console.log(err));
+    firstStepData = req.body;
+    for(key in firstStepData){
+        firstStepData[key] = firstStepData[key].trim();
+    }
+    for(key in firstStepData){
+        if(firstStepData[key] ==='')
+            firstStepData[key]=null;
+    }
+    if(firstStepData.Income)
+        firstStepData.Income = Number(firstStepData.Income.trim());
+    if(firstStepData.ChildrenStatus)
+        firstStepData.ChildrenStatus = Number(firstStepData.ChildrenStatus.trim());
+    if(firstStepData.Sisters)
+        firstStepData.Sisters = Number(firstStepData.Sisters.trim());
+    if(firstStepData.Brothers)
+        firstStepData.Brothers = Number(firstStepData.Brothers.trim());
+    if(((typeof firstStepData.Income === "number")  && (typeof firstStepData.ChildrenStatus === "number") && (typeof firstStepData.Sisters === "number")&& (typeof firstStepData.Brothers === "number"))){
+        User.update(email,firstStepData,'first-step')
+            .then(result=>{
+                res.writeHead(200,{'Content-Type':'text/html'});
+                res.write('<h1>Changes Saved Successfully!</h1>');
+                res.end();
+            })
+            .catch(err => {
+                console.log(err);
+                res.redirect('/');
+            });
+    }else {
+        res.redirect('/first-step');
+    }
 };
-
 
 
 
