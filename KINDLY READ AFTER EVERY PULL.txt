@@ -10,14 +10,14 @@ use yourpartner;
 create table credentials( 
 	MemberID integer(10) primary key auto_increment,
 	EmailID char(30) unique not null,
-	MobileNO char(12) unique not null,
+	MobileNO char(15) unique not null,
 	password char(20) not null
 );
 
 create table onlyregistered(
 	MemberID integer(10) primary key not null,
 	EmailID char(30) unique not null,
-	MobileNO char(10) unique not null,
+	MobileNO char(15) unique not null,
 	FirstName char(20) not null,
 	LastName char(20) not null,
 	AgeDate integer(2) not null,
@@ -81,5 +81,14 @@ alter table onlyregistered add foreign key (EmailID) references credentials(Emai
 alter table onlyregistered add foreign key (MemberID) references credentials(MemberID) on delete cascade on update cascade;
 
 alter table fullyregistered drop Age;
+
+alter table credentials add column resetToken text;
+
+alter table credentials modify resetToken char(255) unique;
+
+alter table credentials add column resetTokenExpiration int;
+
+alter table credentials modify resetTokenExpiration bigint;
+
 
 -------------------------------------------------------------------------------------------------------------

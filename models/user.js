@@ -12,6 +12,7 @@ module.exports = class User {
         this.ageYear = ageYear;
         this.gender = gender;
     }
+
     static login(username,password){
         let  memberId;
         return db.execute("select memberID from credentials where  EmailID = '"+username+"' and '"+password+"'=password")
@@ -106,7 +107,7 @@ module.exports = class User {
                         ',' +  (  obj.SecondaryEducation?('"' + obj.SecondaryEducation + '"'):'NULL' ) +
                         ',' +  (  obj.CollegeDegree?('"' + obj.CollegeDegree + '")'):'NULL)' )
                         )
-                        .then(()=>{
+                        .then(sfsadf=>{
                             return db.execute('insert into onlyregistered values (' +
                                 ''+results[0].MemberID +
                                 ',"' + results[0].EmailID+
@@ -166,7 +167,21 @@ module.exports = class User {
     }
 
     static signup(obj){
-        return db.execute('insert into credentials (EmailID,MobileNO,password) values(?,?,?)',[obj.EmailID,obj.MobileNO,obj.password]);
+        console.log()
+        return db.execute('insert into credentials (EmailID,MobileNO,password) values(?,?,?)',[obj.EmailID,obj.MobileNO,obj.password])
+    }
+
+    static setToken(email,token){
+        return db.execute(`update credentials set resetToken = '${token}', resetTokenExpiration = ${Date.now()+ 600000} where EmailID = '${email}' `);
+    }
+
+    static changePWD(token,pwd){
+        return db.execute(`update credentials set password = "${pwd}",resetToken = NULL where resetToken = '${token}' and resetTokenExpiration  >= ${Date.now()}`)
+
+    }
+
+    static checkToken(token){
+        return db.execute(`select count(*) as rowsFound from credentials where resetToken = '${token}' and resetTokenExpiration  >= ${Date.now()}`);
     }
 };
 

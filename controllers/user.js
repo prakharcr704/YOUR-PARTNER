@@ -81,7 +81,6 @@ exports.getEdit = (req,res)=>{
                     User.GetNewUserData(email)
                         .then(result =>{
                             console.log(result)
-
                             res.redirect('/first-step')
                         })
                         .catch(err => console.log(err))
@@ -196,9 +195,8 @@ exports.postFirstStep = (req,res)=>{
         console.log(firstStepData)
         User.update(email,firstStepData,'first-step')
             .then(result=>{
-                res.writeHead(200,{'Content-Type':'text/html'});
-                res.write('<h1>Changes Saved Successfully!</h1>');
-                res.end();
+                res.redirect('/');
+                return;
             })
             .catch(err => {
                 console.log(err);

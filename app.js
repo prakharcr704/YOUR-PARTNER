@@ -12,7 +12,8 @@ const path = require('path');
 const userRoutes  = require('./routes/user');
 const authRoutes  = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
-const errorController = require('./controllers/error')
+const errorController = require('./controllers/error');
+const resetRoutes = require('./routes/reset');
 //////////////////////////////////////////////////////////////////////////
 /* EJS used to render templates into webpages*//*middlewares*/
 app.set('view engine','ejs');
@@ -25,6 +26,7 @@ app.use(session({secret: 'r#$#EF#rg45tr34%4454Rf$F%T%^tY567iU&*OI()P)(K0-+{_)_:0
 app.use('/auth',authRoutes.routes);
 app.use('/admin',adminRoutes.routes);
 app.use(userRoutes.routes);
+app.use('/reset',resetRoutes.routes);
 app.use(errorController.get404);
 //////////////////////////////////////////////////////////////////////////
 /* localhost:2000 used as domain of the project

@@ -1,13 +1,16 @@
 const User = require('../models/user');
+
+const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const sendGridTransport = require('nodemailer-sendgrid-transport');
 
+const host = 'localhost:2000'
+//const host = 'https://yourpartner.run-ap-south1.goorm.io/'
 const transporter = nodemailer.createTransport(sendGridTransport({
     auth: {
         api_key: "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"
     }
 }));
-
 
 exports.getLogin = (req,res,next)=>{
     const isLoggedIn = req.session.isLoggedIn;
@@ -62,7 +65,6 @@ exports.getLogout = (req,res)=>{
     res.redirect('/auth/login');
 };
 
-
 exports.getSignUp = (req,res) => {
     if(req.session.isLoggedIn){
         res.redirect('/');
@@ -84,7 +86,6 @@ exports.postSignUp = (req,res)=>{
     }
     User.signup(obj)
         .then(result => {
-
 
             res.redirect('/auth/login');
 
@@ -119,28 +120,68 @@ exports.postSignUp = (req,res)=>{
         });
 };
 
+exports.postForgotPassword = (req,res) =>{
+    const EmailID = req.body.EmailID;
+    crypto.randomBytes(32,(err,buffer)=>{
+        if(err){
+            res.writeHead(200,{'Content-Type':'text/html'});
+            res.write('<h1>Attention!</h1><br /><br />There might be some seriout technical issue due to which you are not able to sign up <br />Please Try again Later');
+            res.end();
+        }
+        const token = buffer.toString('hex');
+
+        User.setToken(EmailID,token)
+            .then(result=>{
+                if(result[0].affectedRows === 0){
+                    res.render('auth/resetPassword',{
+                        pageTitle: "Forgot Password",
+                        path: "",
+                        message: "No account linked to given email, try again",
+                        isLoggedIn: false
+                    });
+                }else if(result[0].affectedRows === 1){
+                    const fullToken = `http://${host}/reset/get/${token}`;
+                    transporter.sendMail({
+                        to: EmailID,
+                        from: 'prem@yourpartner.com',
+                        subject: 'Reset Password!',
+                        html: `<h1>Your Partner</h1>
+                                <br>
+                                <h2>You requested for password reset</h2>
+                                <br>
+                                <h2>Click the button to reset password</h2>
+                                <h3>link is valid for 10 minutes</h3>
+                                <div class="p-t-15">
+                                    <a href="${fullToken}"><button style="position: relative;float: left;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;background: #4272d7;">Reset Password</button></a>
+                                </div>`
+                    })
+                        .catch(err => console.log(err));
+                    res.render('auth/login',{
+                        pageTitle: "Login",
+                        path: 'login',
+                        message: 'Check your Email to reset password',
+                        isLoggedIn: false
+                    });
+                }
+                else{
+                    res.writeHead(200,{'Content-Type':'text/html'});
+                    res.write('<h1>Attention!</h1><br /><br />There might be some seriout technical issue due to which you are not able to sign up <br />Please Try again Later');
+                    res.end();
+                }
+            })
+            .catch(err => console.log(err));
+
+    })
+
+
+
+};
+
 exports.getForgotPassword = (req,res) =>{
     res.render('auth/resetPassword',{
         pageTitle: "Forgot Password",
         path: "",
-        isLoggedIn: false
-    })
-};
-
-exports.postForgotPassword = (req,res) =>{
-    res.render('auth/login',{
-        pageTitle: "Login",
-        path: 'login',
-        message: 'Check your Email to reset password',
+        message: undefined,
         isLoggedIn: false
     });
-
-    transporter.sendMail({
-        to: req.body.EmailID,
-        from: 'prem@yourpartner.com',
-        subject: 'Reset Password!',
-        html: '<h1>Reset your password! </h1>',
-    })
-        .catch(err => console.log(err));
-
 };
