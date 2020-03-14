@@ -43,13 +43,13 @@
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">First name</label>
-                                            <input class="input--style-4" type="text" name="FirstName"  value="" >
+                                            <input class="input--style-4" required type="text" name="FirstName"  value="" >
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">Last name</label>
-                                            <input class="input--style-4" type="text" name="LastName" value="" >
+                                            <input class="input--style-4" required type="text" name="LastName" value="" >
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                         <div class="input-group">
                                             <label class="label">Date of Birth</label>
                                             <div class="input-group-icon">
-                                                <input class="input--style-4 js-datepicker" type="text" name="DOB"  value="" >
+                                                <input class="input--style-4 js-datepicker" required type="text" name="DOB"  value="" >
                                                 <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                             </div>
                                         </div>
@@ -90,7 +90,7 @@
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">Mobile Number</label>
-                                            <input class="input--style-4" type="text" name="MobileNO" disabled value="<%if(newUserData[0]){%><%=newUserData[0] %><%}%>">
+                                            <input class="input--style-4" type="text" required name="MobileNO" disabled value="<%if(newUserData[0]){%><%=newUserData[0] %><%}%>">
                                         </div>
                                     </div>
                                 </div>
@@ -164,7 +164,7 @@
                                 <div class="row row-space">
                                     <div class="col-2">
                                         <div class="input-group">
-                                            <label class="label">smoke</label>
+                                            <label class="label">Smoke</label>
                                             <div class="p-t-10">
                                                 <label class="radio-container m-r-45">Yes
                                                     <input type="radio" checked="checked" name="Smoke" value="Yes">
@@ -205,7 +205,7 @@
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">Height</label>
-                                            <input class="input--style-4" type="text" name="Height">
+                                            <input class="input--style-4" type="text" required name="Height">
                                         </div>
                                     </div>
                                 </div>
