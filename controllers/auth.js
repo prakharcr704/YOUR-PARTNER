@@ -4,15 +4,16 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const sendGridTransport = require('nodemailer-sendgrid-transport');
 
-const host = 'localhost:2000'
+const host = 'localhost:2000';
 //const host = 'https://yourpartner.run-ap-south1.goorm.io/'
+
 const transporter = nodemailer.createTransport(sendGridTransport({
     auth: {
         api_key: "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"
     }
 }));
 
-exports.getLogin = (req,res,next)=>{
+exports.getLogin = (req,res)=>{
     const isLoggedIn = req.session.isLoggedIn;
     if(!isLoggedIn) {
         res.render('auth/login', {
@@ -26,25 +27,47 @@ exports.getLogin = (req,res,next)=>{
     }
 };
 
-exports.postLogin = (req,res,next)=>{
+exports.postLogin = (req,res)=>{
     const email = req.body.email;
     const password = req.body.password;
     User.login(email,password)
-        .then(result=>{
-            result = result.toString();
-            console.log(result);
-            if(result === 'logIn' || result === 'logInButCompleteTheProfileFirst') {
+        .then((result)=>{
+            if(result[0] === 'logIn' || result[0] === 'logInButCompleteTheProfileFirst') {
+                if(result[1]==='N'){
+                    const fullToken = 'http://'+host+'/auth/verify/'+email;
+                    transporter.sendMail({
+                        to: email,
+                        from: 'prem@yourpartner.com',
+                        subject: 'Verify Email Address',
+                        html: `<h1>Your Partner</h1>
+                                <br>
+                                <h2>You are newly signed up on yourpartner.com. </h2><br><h3>You won't be able to use our services untill you verify your email address.</h3>
+                                <br>
+                                <h4>Click the button to verify your email address</h4>
+                                <div class="p-t-15">
+                                    <a href="${fullToken}"><button style="position: center ;float: left;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;background: #4272d7;">Verify Email</button></a>
+                                </div>`
+                    })
+                        .catch(err => console.log(err));
+
+                    res.render('auth/not-verified',{
+                        pageTitle:"Please verify your email address",
+                        path:"",
+                        isLoggedIn:false
+                    });
+                    req.session.isLoggedIn = undefined;
+                    return;
+                }
                 console.log('cookie setting');
                 req.session.isLoggedIn = true;
                 req.session.email = email;
                 req.session.password = password;
-                if(result === 'logInButCompleteTheProfileFirst') {
+
+                if(result[0] === 'logInButCompleteTheProfileFirst') {
                     res.redirect('/first-step');
-                    return;
                 }
                 else {
                     res.redirect('/');
-                    return;
                 }
             }else {
                 res.render('auth/login',{
@@ -81,30 +104,35 @@ exports.getSignUp = (req,res) => {
 
 exports.postSignUp = (req,res)=>{
     let obj = req.body;
-    for(o in obj){
+    for(let o in obj){
         obj[o]=obj[o].trim();
     }
     User.signup(obj)
-        .then(result => {
-
+        .then( ()=> {
+            const email = obj.EmailID;
             res.redirect('/auth/login');
-
+            const fullToken = 'http://'+host+'/auth/verify/'+email;
             transporter.sendMail({
-                to: obj.EmailID,
+                to: email,
                 from: 'prem@yourpartner.com',
-                subject: 'Signup Succeeded!',
-                html: '<h1>You Successfully Signed Up!</h1><hr>'+obj.EmailID,
+                subject: 'Verify Email Address!',
+                html: `<h1>Your Partner</h1>
+                                <br>
+                                <h2>You are newly signed up on yourpartner.com. </h2><br><h3>You won't be able to use our services untill you verify your email address.</h3>
+                                <br>
+                                <h4>Click the button to verify your email address</h4>
+                                <div class="p-t-15">
+                                    <a href="${fullToken}"><button style="position: center ;float: left;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;background: #4272d7;">Verify Email</button></a>
+                                </div>`
             })
                 .catch(err => console.log(err));
-
-            return;
         })
         .catch(err => {
             if(err.errno === 1062){
                 if(req.session.isLoggedIn){
                     res.redirect('/');
                 }else{
-                    res.render('signUp',{
+                    res.render('auth/signUp',{
                         pageTitle: "Fill Proile Data",
                         path: 'signup',
                         userData: [],
@@ -184,4 +212,13 @@ exports.getForgotPassword = (req,res) =>{
         message: undefined,
         isLoggedIn: false
     });
+};
+
+
+exports.getVerifyEmail =(req,res)=>{
+    User.verifyEmail(req.params.email)
+        .then(()=>{
+            res.redirect('/auth/login');
+        })
+        .catch(err=>console.log(err));
 };

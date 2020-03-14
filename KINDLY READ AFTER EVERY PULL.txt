@@ -90,5 +90,5 @@ alter table credentials add column resetTokenExpiration int;
 
 alter table credentials modify resetTokenExpiration bigint;
 
-
+alter table credentials add column Verified char(1) default 'N';
 -------------------------------------------------------------------------------------------------------------

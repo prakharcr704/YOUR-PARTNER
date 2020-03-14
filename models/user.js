@@ -15,16 +15,16 @@ module.exports = class User {
 
     static login(username,password){
         let  memberId;
-        return db.execute("select memberID from credentials where  EmailID = '"+username+"' and '"+password+"'=password")
-            .then(result=>{
-                memberId = result[0];
+        return db.execute("select memberID,Verified from credentials where  EmailID = '"+username+"' and '"+password+"'=password")
+            .then(results=>{
+                memberId = results[0];
                 if(memberId.length === 1){
                     return db.execute("select Occupation from fullyregistered where MemberID = " + memberId[0].memberID)
                         .then(([result,tableDef])=>{
                             if(result.length==0){
-                                return 'logInButCompleteTheProfileFirst';
+                                return ['logInButCompleteTheProfileFirst',results[0][0].Verified];
                             }else{
-                                return 'logIn';
+                                return ['logIn',results[0][0].Verified];
                             }
                         })
                         .catch(err => console.log(err));
@@ -183,5 +183,10 @@ module.exports = class User {
     static checkToken(token){
         return db.execute(`select count(*) as rowsFound from credentials where resetToken = '${token}' and resetTokenExpiration  >= ${Date.now()}`);
     }
+
+    static verifyEmail(email){
+        return db.execute(`update credentials set Verified = 'Y' where EmailID = "${email}"`);
+    }
+
 };
 

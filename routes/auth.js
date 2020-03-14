@@ -12,6 +12,7 @@ const router = express.Router();
 
 router.get('/signup',authController.getSignUp);
 router.get('/login',authController.getLogin);
+router.get('/verify/:email',authController.getVerifyEmail);
 router.get('/logout',authController.getLogout);
 router.post('/validateLogin',authController.postLogin);
 router.post('/signup',authController.postSignUp);

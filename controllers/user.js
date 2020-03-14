@@ -3,7 +3,7 @@ const db = require('./../util/database');
 exports.getHomepage = (req,res,next)=>{
     User.login(req.session.email,req.session.password)
         .then(result => {
-            if(result == 'logInButCompleteTheProfileFirst')
+            if(result[0] == 'logInButCompleteTheProfileFirst')
                 res.redirect('/first-step');
             else
                 res.render('index',{
@@ -18,7 +18,7 @@ exports.getHomepage = (req,res,next)=>{
 exports.getAboutpage = (req,res,next)=>{
     User.login(req.session.email,req.session.password)
         .then(result => {
-            if(result == 'logInButCompleteTheProfileFirst')
+            if(result[0] == 'logInButCompleteTheProfileFirst')
                 res.redirect('/first-step');
             else
                 res.render('about',{
@@ -34,7 +34,7 @@ exports.getAboutpage = (req,res,next)=>{
 exports.getServicespage = (req,res,next)=>{
     User.login(req.session.email,req.session.password)
         .then(result => {
-            if(result == 'logInButCompleteTheProfileFirst')
+            if(result[0] == 'logInButCompleteTheProfileFirst')
                 res.redirect('/first-step');
             else
                 res.render('services',{
@@ -49,7 +49,7 @@ exports.getServicespage = (req,res,next)=>{
 exports.getContactpage = (req,res,next)=>{
     User.login(req.session.email,req.session.password)
         .then(result => {
-            if(result == 'logInButCompleteTheProfileFirst')
+            if(result[0] == 'logInButCompleteTheProfileFirst')
                 res.redirect('/first-step');
             else
                 res.render('contact',{
@@ -147,7 +147,7 @@ exports.getFirstStep = (req,res)=>{
     }
     User.login(req.session.email,req.session.password)
         .then(result => {
-            if(result == 'logInButCompleteTheProfileFirst'){
+            if(result[0] == 'logInButCompleteTheProfileFirst'){
                 const email = req.session.email;
                 User.GetMobileNumber(email)
                     .then(result=>{
