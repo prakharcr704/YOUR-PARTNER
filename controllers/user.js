@@ -207,12 +207,28 @@ exports.postFirstStep = (req,res)=>{
     }
 };
 
+exports.getDestination = (req,res)=>{
+    res.render('destination',{
+        pageTitle:"Destination",
+        isLoggedIn: req.session.isLoggedIn
+    });
+}
 
 
+exports.getSearch = (req,res)=>{
+    res.render('search',{
+        pageTitle:"Search",
+        isLoggedIn: req.session.isLoggedIn
+    });
+}
 
 
-
-
+exports.getHotels = (req,res)=>{
+    res.render('hotels',{
+        pageTitle:"Hotels",
+        isLoggedIn: req.session.isLoggedIn
+    });
+}
 
 
 
