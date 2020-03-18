@@ -35,7 +35,7 @@ module.exports = class User {
             .catch(err => console.log(err));
     }
 
-    static delete(username){
+    static deleteAccount(username){
         return db.execute('delete from credentials where EmailID = "'+username+'"');
     }
 
@@ -167,7 +167,6 @@ module.exports = class User {
     }
 
     static signup(obj){
-        console.log()
         return db.execute('insert into credentials (EmailID,MobileNO,password) values(?,?,?)',[obj.EmailID,obj.MobileNO,obj.password])
     }
 

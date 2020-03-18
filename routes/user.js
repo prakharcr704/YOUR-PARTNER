@@ -13,7 +13,7 @@ router.get('/',userController.getHomepage);
 router.get('/about',userController.getAboutpage);
 router.get('/services',userController.getServicespage);
 router.get('/contact',userController.getContactpage);
-router.get('/delete',userController.getDelete);
+router.get('/delete',userController.getDeleteAccount);
 router.get('/hotels',userController.getHotels);
 router.get('/search',userController.getSearch);
 router.get('/destination',userController.getDestination);

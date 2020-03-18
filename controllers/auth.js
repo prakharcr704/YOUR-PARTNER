@@ -9,7 +9,7 @@ const host = 'localhost:2000';
 
 const transporter = nodemailer.createTransport(sendGridTransport({
     auth: {
-        api_key: "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"
+        api_key: ""
     }
 }));
 

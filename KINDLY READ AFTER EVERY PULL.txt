@@ -7,6 +7,16 @@ install mysql and run these queries
 
 create database yourpartner;
 use yourpartner;
+
+
+drop table onlyregistered;
+drop table fullyregistered;
+drop table credentials;
+drop table onlyregistered;
+drop table fullyregistered;
+
+
+
 create table credentials( 
 	MemberID integer(10) primary key auto_increment,
 	EmailID char(30) unique not null,
@@ -47,8 +57,8 @@ create table fullyregistered(
 	ChildrenStatus integer(1) not null,
 	Smoke char(5),
 	Drink char(5),
-	Education char(100),
-	Caste char(10) not null,
+	HigherEducation char(100),
+	Religion char(10) not null,
 	MotherTongue char(15),
 	FatherOccupation char(20),
 	MotherOccupation char(20),
@@ -62,13 +72,10 @@ create table fullyregistered(
 
 
 
-alter table fullyregistered rename column Education to HigherEducation;
 
 alter table fullyregistered add column SecondaryEducation char(100) NULL ;
 
 alter table fullyregistered add column CollegeDegree char(100) NULL ;
-
-alter table fullyregistered rename column Caste to Religion;
 
 alter table fullyregistered modify Expectations char(60) not null;
 
@@ -90,5 +97,7 @@ alter table credentials add column resetTokenExpiration int;
 
 alter table credentials modify resetTokenExpiration bigint;
 
-alter table credentials add column Verified char(1) default 'N';
+alter table credentials add column Verified char(1) default 'N'; 
+
+alter table fullyregistered modify Complexion char(20);
 -------------------------------------------------------------------------------------------------------------
