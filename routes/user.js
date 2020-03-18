@@ -21,6 +21,7 @@ router.get('/edit-profile',userController.getEdit);
 router.post('/edit-profile',userController.postEdit);
 router.get('/first-step',userController.getFirstStep);
 router.post('/first-step',userController.postFirstStep);
+router.post('/searchQuery',userController.getSearchResults);
 /////////////////////////////////////////////////////////
 /*you can use routes as  authRoutes.routes*/
 exports.routes = router;

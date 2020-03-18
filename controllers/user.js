@@ -230,7 +230,28 @@ exports.getHotels = (req,res)=>{
     });
 }
 
-
+exports.getSearchResults = (req,res)=>{
+    const isLoggedIn = req.session.isLoggedIn;
+    if(!isLoggedIn)
+        res.redirect('/auth/login');
+    let filters = req.body;
+    for(f in filters){
+        if(filters[f] === '')
+                filters[f] = null;
+    }
+    let filter = {
+        MotherTongue : filters.MotherTongue,
+        Religion : filters.Religion,
+        Gender : filters.Gender
+    }
+    if(!filters.From&&!filters.To&&(filters.From>filters.To))
+        filters.From = filters.To = null;
+    User.search(filters.Name? filters.Name.split(" ")[0] :null,filters.Name? filters.Name.split(" ")[1]?filters.Name.split(" ")[1] : null : null,filter,filters.From,filters.To)
+        .then(result=>{
+            res.send(result)
+        })
+        .catch(err => console.log(err));
+}
 
 
 

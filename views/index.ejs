@@ -1,9 +1,9 @@
 <%- include('./includes/head.ejs') %>
-	<body>
-		
-	<div class="fh5co-loader"></div>
-	
-	<div id="page">
+<body>
+
+<div class="fh5co-loader"></div>
+
+<div id="page">
 
 	<%- include('./includes/navigation.ejs') %>
 
@@ -11,48 +11,196 @@
 
 		<div class="overlay"></div>
 		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2 text-center">
-					<div class="display-t">
-						<div class="display-tc animate-box" data-animate-effect="fadeIn">
-							<h1>Prakhar &amp; Katrina</h1>
-							<h2>We Are Getting Married</h2>
-							
-							<div class="simply-countdown simply-countdown-one"></div>
-							<p><a href="#" class="btn btn-default btn-sm">Save the date</a></p>
-						</div>
+			<div class="display-t">
+				<div class="display-tc animate-box" data-animate-effect="fadeIn">
+					<div class="s008">
+						<form method="post" action="/searchQuery">
+							<div class="inner-form">
+								<div class="basic-search">
+									<div class="input-field">
+										<input id="search" type="text" placeholder="Search by Name" name="Name" />
+										<div class="icon-wrap">
+											<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+												<path d="M18.869 19.162l-5.943-6.484c1.339-1.401 2.075-3.233 2.075-5.178 0-2.003-0.78-3.887-2.197-5.303s-3.3-2.197-5.303-2.197-3.887 0.78-5.303 2.197-2.197 3.3-2.197 5.303 0.78 3.887 2.197 5.303 3.3 2.197 5.303 2.197c1.726 0 3.362-0.579 4.688-1.645l5.943 6.483c0.099 0.108 0.233 0.162 0.369 0.162 0.121 0 0.242-0.043 0.338-0.131 0.204-0.187 0.217-0.503 0.031-0.706zM1 7.5c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5-2.916 6.5-6.5 6.5-6.5-2.916-6.5-6.5z"></path>
+											</svg>
+										</div>
+									</div>
+								</div>
+								<div class="advance-search">
+									<span class="desc">Advanced Search</span>
+									<div class="row">
+										<div class="input-field">
+											<h5 style="color:white;">I'm looking for a</h5>
+											<div class="input-select">
+												<select  name="Gender">
+													<option value=""></option>
+													<option  value="M">Male </option>
+													<option value="F">Female</option>
+												</select>
+											</div>
+										</div>
+										<div class="input-field">
+											<h5 style="color:white;">Age</h5>
+											<div class="input-select">
+												<select  name="From">
+													<option value=""></option>
+													<option  value="">18</option>
+													<option value="19">19</option>
+													<option value="20">20</option>
+													<option value="21">21</option>
+													<option value="22">22</option>
+													<option value="23">23</option>
+													<option value="24">24</option>
+													<option value="25">25</option>
+													<option value="26">26</option>
+													<option value="27">27</option>
+													<option value="28">28</option>
+													<option value="29">29</option>
+													<option value="30">30</option>
+												</select>
+											</div>
+										</div>
+										<div class="input-field">
+											<h5 style="color:white;">To</h5>
+											<div class="input-select">
+												<select  name="To">
+													<option value=""></option>
+													<option value="">18</option>
+													<option value="19">19</option>
+													<option value="20">20</option>
+													<option value="21">21</option>
+													<option value="22">22</option>
+													<option value="23">23</option>
+													<option value="24">24</option>
+													<option value="25">25</option>
+													<option value="26">26</option>
+													<option value="27">27</option>
+													<option value="28">28</option>
+													<option value="29">29</option>
+													<option value="30">30</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="input-field">
+											<h5 style="color:white;">Mother Tongue</h5>
+											<div class="input-select">
+												<select  name="MotherTongue">
+													<option value="" >Mother Tongue</option>
+													<option>Hindi</option>
+													<option>Punjabi</option>
+													<option>Marathi</option>
+													<option>Bengali</option>
+													<option>Gujrati</option>
+													<option>English</option>
+													<option>Bhojpuri</option>
+													<option>Tamil</option>
+													<option>Telegu</option>
+													<option>Malayalam</option>
+													<option>Hariyanvi</option>
+												</select>
+											</div>
+										</div>
+										<div class="input-field">
+											<h5 style="color:white;">Religion</h5>
+											<div class="input-select">
+												<select  name="Religion">
+													<option value="">Religion</option>
+													<option>Hindu</option>
+													<option>Muslim</option>
+													<option>Christian</option>
+													<option>Sikh</option>
+													<option>Jain</option>
+													<option>Buddha</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="row third">
+										<div class="input-field">
+											<div class="result-count">
+												<span> </span></div>
+											<div class="group-btn">
+												<button class="btn-delete" id="delete" type="reset">Reset</button>
+												<button class="btn-search" type="submit">Search</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
+			<script src="js/extention/choices.js"></script>
+			<script>
+				const customSelects = document.querySelectorAll("select");
+				const deleteBtn = document.getElementById('delete')
+				const choices = new Choices('select',
+						{
+							searchEnabled: false,
+							removeItemButton: true,
+							itemSelectText: '',
+						});
+				for (let i = 0; i < customSelects.length; i++)
+				{
+					customSelects[i].addEventListener('addItem', function(event)
+					{
+						if (event.detail.value)
+						{
+							let parent = this.parentNode.parentNode
+							parent.classList.add('valid')
+							parent.classList.remove('invalid')
+						}
+						else
+						{
+							let parent = this.parentNode.parentNode
+							parent.classList.add('invalid')
+							parent.classList.remove('valid')
+						}
+					}, false);
+				}
+				deleteBtn.addEventListener("click", function(e)
+				{
+					e.preventDefault()
+					const deleteAll = document.querySelectorAll('.choices__button')
+					for (let i = 0; i < deleteAll.length; i++)
+					{
+						deleteAll[i].click();
+					}
+				});
+
+			</script>
 		</div>
 	</header>
 
+<% if (!isLoggedIn){%>
+	<center>
+		<div class="container">
+			<frameset>
 
-<center>
-<div class="container">  
-<frameset>
+				<br> <br>
+				<legend>  <h1>Login Now</h1> </legend>
 
-	<br> <br>
-<legend>  <h1>Login Now</h1> </legend>  
- 
-<form style="width:300px" action="/auth/validateLogin" method="post">
-  <div class="form-group">  
-    <label for="exampleInputEmail1">Email address</label>  
-    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" name="email">
-  </div>  
-  <div class="form-group">  
-    <label for="exampleInputPassword1">Password</label>  
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
-  </div>  
-    
-  <button type="submit" class="btn btn-primary">Submit</button>  
-</form>  
-  </frameset>
-</div>  
-  
- </center>
+				<form style="width:300px" action="/auth/validateLogin" method="post">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Email address</label>
+						<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" name="email">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">Password</label>
+						<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+					</div>
 
-		<%- include('./includes/IndexAndGalleryAndContactAndServicesBrideAndGroomDescription.ejs') %>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+			</frameset>
+		</div>
+
+	</center>
+<%}%>
+	<%- include('./includes/IndexAndGalleryAndContactAndServicesBrideAndGroomDescription.ejs') %>
 
 	<div id="fh5co-event" class="fh5co-bg" style="background-image:url(/images/img_bg_3.jpg);">
 		<div class="overlay"></div>
@@ -107,7 +255,7 @@
 	</div>
 
 
-<%- include('./includes/IndexAndAboutCoupleStory.ejs') %>
+	<%- include('./includes/IndexAndAboutCoupleStory.ejs') %>
 
 	<div id="fh5co-gallery" class="fh5co-section-gray">
 		<div class="container">
@@ -121,41 +269,41 @@
 			<div class="row row-bottom-padded-md">
 				<div class="col-md-12">
 					<ul id="fh5co-gallery-list">
-						
-						<li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url(/gallery-2.jpg); "> 
-						<a href="/images/gallery-1.jpg">
-							<div class="case-studies-summary">
-								<span>14 Photos</span>
-								<h2>Two Glas of Juice</h2>
-							</div>
-						</a>
-					</li>
-					<li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url(/images/uae.jpg); ">
-						<a href="#" class="color-2">
-							<div class="case-studies-summary">
-								<span>30 Photos</span>
-								<h2>Timer starts now!</h2>
-							</div>
-						</a>
-					</li>
+
+						<li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url(/gallery-2.jpg); ">
+							<a href="/images/gallery-1.jpg">
+								<div class="case-studies-summary">
+									<span>14 Photos</span>
+									<h2>Two Glas of Juice</h2>
+								</div>
+							</a>
+						</li>
+						<li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url(/images/uae.jpg); ">
+							<a href="#" class="color-2">
+								<div class="case-studies-summary">
+									<span>30 Photos</span>
+									<h2>Timer starts now!</h2>
+								</div>
+							</a>
+						</li>
 
 
-					<li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url(/images/skyline.jpg); ">
-						<a href="#" class="color-3">
-							<div class="case-studies-summary">
-								<span>90 Photos</span>
-								<h2>Beautiful sunset</h2>
-							</div>
-						</a>
-					</li>
-					<li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url(/images/dubai.jpg); ">
-						<a href="#" class="color-4">
-							<div class="case-studies-summary">
-								<span>12 Photos</span>
-								<h2>Company's Conference Room</h2>
-							</div>
-						</a>
-					</li>
+						<li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url(/images/skyline.jpg); ">
+							<a href="#" class="color-3">
+								<div class="case-studies-summary">
+									<span>90 Photos</span>
+									<h2>Beautiful sunset</h2>
+								</div>
+							</a>
+						</li>
+						<li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url(/images/dubai.jpg); ">
+							<a href="#" class="color-4">
+								<div class="case-studies-summary">
+									<span>12 Photos</span>
+									<h2>Company's Conference Room</h2>
+								</div>
+							</a>
+						</li>
 
 						<li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url(/images/gallery-5.jpg); ">
 							<a href="#" class="color-3">
@@ -183,7 +331,7 @@
 							</a>
 						</li>
 
-						<li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url(/images/gallery-8.jpg); "> 
+						<li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url(/images/gallery-8.jpg); ">
 							<a href="#" class="color-5">
 								<div class="case-studies-summary">
 									<span>90 Photos</span>
@@ -199,7 +347,7 @@
 								</div>
 							</a>
 						</li>
-					</ul>		
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -318,31 +466,13 @@
 
 
 	<%- include('./includes/footer.ejs')%>
-	
+
 	<%- include('./includes/commonScripts.ejs')%>
 
 	<!-- // <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.js"></script> -->
 	<script src="/js/simplyCountdown.js"></script>
-	
-	<script>
-    var d = new Date(new Date().getTime() + 200 * 120 * 120 * 2000);
 
-    // default example
-    simplyCountdown('.simply-countdown-one', {
-        year: d.getFullYear(),
-        month: d.getMonth() + 1,
-        day: d.getDate()
-    });
 
-    //jQuery example
-    $('#simply-countdown-losange').simplyCountdown({
-        year: d.getFullYear(),
-        month: d.getMonth() + 1,
-        day: d.getDate(),
-        enableUtc: false
-    });
-</script>
-
-	</body>
+</body>
 </html>
 

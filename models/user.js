@@ -166,6 +166,31 @@ module.exports = class User {
             .catch(err => console.log(err));
     }
 
+    static search(FirstName,LastName,filters,AgeFrom,AgeTo){
+        let Query = "select * from onlyregistered o, fullyregistered f where o.MemberID = f.MemberID ";
+        for(let f in filters){
+            if(filters[f])
+                Query += ` and ${f} = '${filters[f]}' `;
+        }
+        if(FirstName){
+            Query += ` and soundex(FirstName) = soundex('${FirstName}')  `;
+        }
+        if(LastName){
+            Query += ` and soundex(LastName) = soundex('${LastName}')  `;
+        }
+
+        if( AgeFrom && AgeTo )
+            Query += ` and ${Date.now()/(3600000 * 24*365) +1970} - AgeYear between ${AgeFrom}  and ${AgeTo} `;
+        else if(AgeFrom)
+            Query += ` and ${Date.now()/(3600000 * 24*365) +1970} - AgeYear >= ${AgeFrom} `;
+        else if(AgeTo)
+            Query += ` and ${Date.now()/(3600000 * 24*365) +1970} - AgeYear <= ${AgeTo} `;
+console.log(Query)
+        return db.execute(Query)
+            .then(result=>  result[0])
+            .catch(err => console.log(err));
+    }
+
     static signup(obj){
         return db.execute('insert into credentials (EmailID,MobileNO,password) values(?,?,?)',[obj.EmailID,obj.MobileNO,obj.password])
     }
