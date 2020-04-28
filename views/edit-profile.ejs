@@ -29,13 +29,13 @@
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">First name</label>
-                                            <input class="input--style-4" type="text" name="FirstName" value="<%if(userData.FirstName){%> <%= userData.FirstName %> <%}%>">
+                                            <input class="input--style-4" type="text" name="FirstName" required value="<%if(userData.FirstName){%> <%= userData.FirstName %> <%}%>">
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">Last name</label>
-                                            <input class="input--style-4" type="text" name="LastName" value="<%if(userData.LastName){%> <%= userData.LastName %> <%}%>">
+                                            <input class="input--style-4" type="text" name="LastName" required value="<%if(userData.LastName){%> <%= userData.LastName %> <%}%>">
                                         </div>
                                     </div>
                                 </div>
@@ -44,7 +44,7 @@
                                         <div class="input-group">
                                             <label class="label">Date of Birth</label>
                                             <div class="input-group-icon">
-                                                <input class="input--style-4 js-datepicker" type="text" name="DOB" value="<%if(userData.AgeDate){%> <%= userData.AgeDate+'/'+userData.AgeMonth+'/'+userData.AgeYear %> <%}%>">
+                                                <input class="input--style-4 js-datepicker" type="text" name="DOB" required value="<%if(userData.AgeDate){%> <%= userData.AgeDate+'/'+userData.AgeMonth+'/'+userData.AgeYear %> <%}%>">
                                                 <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                             </div>
                                         </div>
@@ -71,13 +71,13 @@
                                         <div class="input-group">
                                             <label class="label">Email</label>
                                             <input hidden value="<%if(userData.EmailID){%> <%= userData.EmailID %> <%}%>" name="EmailID" >
-                                            <input class="input--style-4" type="email" disabled required name="email" value="<%if(userData.EmailID){%> <%= userData.EmailID %> <%}%>" >
+                                            <input class="input--style-4" type="email" disabled required name="EmailID" value="<%if(userData.EmailID){%> <%= userData.EmailID %> <%}%>" >
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">Mobile Number</label>
-                                            <input class="input--style-4" type="text" disabled name="phone" value="<%if(userData.MobileNO){%> <%= userData.MobileNO %> <%}%>" >
+                                            <input class="input--style-4" type="text" disabled required name="MobileNO" value="<%if(userData.MobileNO){%> <%= userData.MobileNO %> <%}%>" >
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">Occupation</label>
-                                            <input class="input--style-4" type="text" name="Occupation" value="<%if(userData.Occupation){%> <%= userData.Occupation %> <%}%>" >
+                                            <input class="input--style-4" required type="text" name="Occupation" value="<%if(userData.Occupation){%> <%= userData.Occupation %> <%}%>" >
                                         </div>
                                     </div>
                                     <label class="label">Citizenship</label>
@@ -132,7 +132,7 @@
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">About Myself</label>
-                                            <input class="input--style-4" type="text" required name="AboutMyself" value="<%if(userData.AboutMyself){%> <%= userData.AboutMyself %> <%}%>" >
+                                            <input class="input--style-4" type="text" name="AboutMyself" value="<%if(userData.AboutMyself){%> <%= userData.AboutMyself %> <%}%>" >
                                         </div>
                                     </div>
                                     <label class="label">Complexion</label>
@@ -192,7 +192,7 @@
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">Height (in Cms)</label>
-                                            <input class="input--style-4" type="text" name="Height" value="<%if(userData.Height){%> <%= userData.Height %> <%}%>" >
+                                            <input class="input--style-4" type="text" name="Height" required value="<%if(userData.Height){%> <%= userData.Height %> <%}%>" >
                                         </div>
                                     </div>
                                 </div>
@@ -203,11 +203,23 @@
                                             <input class="input--style-4" type="text" required name="Expectations" value="<%if(userData.Expectations){%> <%=userData.Expectations%> <%}%>" >
                                         </div>
                                     </div>
-                                    <div class="col-2">
-                                        <div class="input-group">
-                                            <label class="label">Mother Tongue</label>
-                                            <input class="input--style-4" type="text" required name="MotherTongue" value="<%if(userData.MotherTongue){%> <%=userData.MotherTongue%> <%}%>" >
-                                        </div>
+
+                                    <label class="label">Mother Tongue</label>
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                        <select name="MotherTongue">
+                                            <option <%if(userData.MotherTongue === 'Hindi'){%> selected <%}%> >Hindi</option>
+                                            <option <%if(userData.MotherTongue === 'English'){%> selected <%}%> >English</option>
+                                            <option <%if(userData.MotherTongue === 'Marathi'){%> selected <%}%> >Marathi</option>
+                                            <option <%if(userData.MotherTongue === 'Punjabi'){%> selected <%}%> >Punjabi</option>
+                                            <option <%if(userData.MotherTongue === 'Gujrati'){%> selected <%}%> >Gujrati</option>
+                                            <option <%if(userData.MotherTongue === 'Bengali'){%> selected <%}%> >Bengali</option>
+                                            <option <%if(userData.MotherTongue === 'Bhojpuri'){%> selected <%}%> >Bhojpuri</option>
+                                            <option <%if(userData.MotherTongue === 'Hariyanvi'){%> selected <%}%> >Hariyanvi</option>
+                                            <option <%if(userData.MotherTongue === 'Malayalam'){%> selected <%}%> >Malayalam</option>
+                                            <option <%if(userData.MotherTongue === 'Tamil'){%> selected <%}%> >Tamil</option>
+                                            <option <%if(userData.MotherTongue === 'Telegu'){%> selected <%}%> >Telegu</option>
+                                        </select>
+                                        <div class="select-dropdown"></div>
                                     </div>
                                 </div>
                                 <div class="row row-space">
@@ -248,7 +260,7 @@
                                 <br>
                                 <div class="input-group">
                                     <div style="text-align: center;">
-                                        <label class="label"><strong>Educational Details</strong></label>
+                                        <label class="label"><strong>Educational Details </strong></label>
                                     </div>
                                 </div>
                                 <div class="row row-space">
@@ -301,13 +313,13 @@
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">Brothers</label>
-                                            <input class="input--style-4" type="text" name="Brothers"  value="<%if(userData.Brothers){%> <%=userData.Brothers%> <%}%>">
+                                            <input class="input--style-4" type="text" required name="Brothers"  value="<%if(userData.Brothers){%> <%=userData.Brothers%> <%}%>">
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">Sisters</label>
-                                            <input class="input--style-4" type="text" name="Sisters" value="<%if(userData.Sisters){%> <%=userData.Sisters%> <%}%>">
+                                            <input class="input--style-4" type="text" required name="Sisters" value="<%if(userData.Sisters){%> <%=userData.Sisters%> <%}%>">
                                         </div>
                                     </div>
                                 </div>

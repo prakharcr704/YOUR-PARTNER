@@ -145,7 +145,7 @@
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">About Myself</label>
-                                            <input class="input--style-4" type="text" required name="AboutMyself">
+                                            <input class="input--style-4" type="text" name="AboutMyself">
                                         </div>
                                     </div>
                                     <label class="label">Complexion</label>
@@ -216,11 +216,22 @@
                                             <input class="input--style-4" type="text" required name="Expectations">
                                         </div>
                                     </div>
-                                    <div class="col-2">
-                                        <div class="input-group">
-                                            <label class="label">Mother Tongue</label>
-                                            <input class="input--style-4" type="text" required name="MotherTongue">
-                                        </div>
+                                    <label class="label">Mother Tongue</label>
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                        <select name="MotherTongue">
+                                            <option selected="selected">Hindi</option>
+                                            <option>English</option>
+                                            <option>Marathi</option>
+                                            <option>Punjabi</option>
+                                            <option>Gujrati</option>
+                                            <option>Bengali</option>
+                                            <option>Bhojpuri</option>
+                                            <option>Hariyanvi</option>
+                                            <option>Malayalam</option>
+                                            <option>Tamil</option>
+                                            <option>Telegu</option>
+                                        </select>
+                                        <div class="select-dropdown"></div>
                                     </div>
                                 </div>
                                 <div class="row row-space">
@@ -314,13 +325,13 @@
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">Brothers</label>
-                                            <input class="input--style-4" type="text" name="Brothers">
+                                            <input class="input--style-4" type="text" required name="Brothers">
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">Sisters</label>
-                                            <input class="input--style-4" type="text" name="Sisters">
+                                            <input class="input--style-4" type="text" required name="Sisters">
                                         </div>
                                     </div>
                                 </div>

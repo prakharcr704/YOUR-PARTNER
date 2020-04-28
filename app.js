@@ -1,3 +1,4 @@
+const port = 2000;
 /////////////////////////////////////////////////////////////////////////
 /* Deployment Dependencies*/
 const express = require('express');
@@ -7,10 +8,10 @@ const session = require('express-session');
 /*instances used*/
 const app = express();
 const path = require('path');
-//////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 /*Routes includes*/
 const userRoutes  = require('./routes/user');
-const authRoutes  = require('./routes/auth');
+const authRoutes  = require('./routes/auth');//////////
 const adminRoutes = require('./routes/admin');
 const errorController = require('./controllers/error');
 const resetRoutes = require('./routes/reset');
@@ -31,4 +32,4 @@ app.use(errorController.get404);
 //////////////////////////////////////////////////////////////////////////
 /* localhost:2000 used as domain of the project
 To start the project type "npm start" in console*/
-app.listen(2000);
+app.listen(port);

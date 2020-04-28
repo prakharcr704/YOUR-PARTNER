@@ -15,6 +15,7 @@ exports.getHomepage = (req,res,next)=>{
         })
         .catch(err=>{console.log(err)});
 };
+
 exports.getAboutpage = (req,res,next)=>{
     User.login(req.session.email,req.session.password)
         .then(result => {
@@ -214,14 +215,12 @@ exports.getDestination = (req,res)=>{
     });
 }
 
-
 exports.getSearch = (req,res)=>{
     res.render('search',{
         pageTitle:"Search",
         isLoggedIn: req.session.isLoggedIn
     });
 }
-
 
 exports.getHotels = (req,res)=>{
     res.render('hotels',{
@@ -232,8 +231,10 @@ exports.getHotels = (req,res)=>{
 
 exports.getSearchResults = (req,res)=>{
     const isLoggedIn = req.session.isLoggedIn;
-    if(!isLoggedIn)
+    if(!isLoggedIn) {
         res.redirect('/auth/login');
+        return;
+    }
     let filters = req.body;
     for(f in filters){
         if(filters[f] === '')
@@ -252,13 +253,3 @@ exports.getSearchResults = (req,res)=>{
         })
         .catch(err => console.log(err));
 }
-
-
-
-
-
-
-
-
-
-
