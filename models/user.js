@@ -180,11 +180,11 @@ module.exports = class User {
         }
 
         if( AgeFrom && AgeTo )
-            Query += ` and ${Date.now()/(3600000 * 24*365) +1970} - AgeYear between ${AgeFrom}  and ${AgeTo} `;
+            Query += ` and ${Date.now()/(3600000 * 24*365) +1970} - (AgeYear+(AgeMonth)/12+((AgeDate)/365)) between ${AgeFrom}  and ${AgeTo} `;
         else if(AgeFrom)
-            Query += ` and ${Date.now()/(3600000 * 24*365) +1970} - AgeYear >= ${AgeFrom} `;
+            Query += ` and ${Date.now()/(3600000 * 24*365) +1970} - (AgeYear+(AgeMonth)/12+((AgeDate)/365)) >= ${AgeFrom} `;
         else if(AgeTo)
-            Query += ` and ${Date.now()/(3600000 * 24*365) +1970} - AgeYear <= ${AgeTo} `;
+            Query += ` and ${Date.now()/(3600000 * 24*365) +1970} - (AgeYear+(AgeMonth)/12+((AgeDate)/365)) <= ${AgeTo} `;
 console.log(Query)
         return db.execute(Query)
             .then(result=>  result[0])
