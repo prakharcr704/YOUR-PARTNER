@@ -65,8 +65,8 @@ exports.getContactpage = (req,res,next)=>{
 exports.getDeleteAccount =(req,res)=>{
     User.deleteAccount(req.session.email)
         .then(() => {
-            req.session.isLoggedIn = undefined;
-            req.session.email = undefined;
+            console.log('Account deleted: '+req.session.email);
+            req.session = undefined;
             res.redirect('/');
         })
         .catch(err => console.log(err));
