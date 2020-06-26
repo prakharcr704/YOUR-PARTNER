@@ -1,2 +1,2 @@
 # YOUR-PARTNER
- MATRIMONIAL WEBSITE 
+ Dating and matrimonial web-app with advanced search features. 
