@@ -230,6 +230,7 @@ exports.getHotels = (req,res)=>{
 }
 
 exports.getSearchResults = (req,res)=>{
+    const email = req.session.email;
     const isLoggedIn = req.session.isLoggedIn;
     if(!isLoggedIn) {
         res.redirect('/auth/login');
@@ -247,9 +248,15 @@ exports.getSearchResults = (req,res)=>{
     }
     if(!filters.From&&!filters.To&&(filters.From>filters.To))
         filters.From = filters.To = null;
-    User.search(filters.Name? filters.Name.split(" ")[0] :null,filters.Name? filters.Name.split(" ")[1]?filters.Name.split(" ")[1] : null : null,filter,filters.From,filters.To)
+    User.search(email,filters.Name? filters.Name.split(" ")[0] :null,filters.Name? filters.Name.split(" ")[1]?filters.Name.split(" ")[1] : null : null,filter,filters.From,filters.To)
         .then(result=>{
-            res.send(result)
+            console.log(result);
+            res.render('search-results',{
+                pageTitle: "Search Results",
+                path: 'search-results',
+                result: result,
+                isLoggedIn: req.session.isLoggedIn
+            });
         })
         .catch(err => console.log(err));
 }

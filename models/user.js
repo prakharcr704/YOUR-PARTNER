@@ -21,7 +21,7 @@ module.exports = class User {
                 if(memberId.length === 1){
                     return db.execute("select Occupation from fullyregistered where MemberID = " + memberId[0].memberID)
                         .then(([result,tableDef])=>{
-                            if(result.length==0){
+                            if(result.length===0){
                                 return ['logInButCompleteTheProfileFirst',results[0][0].Verified];
                             }else{
                                 return ['logIn',results[0][0].Verified];
@@ -166,8 +166,8 @@ module.exports = class User {
             .catch(err => console.log(err));
     }
 
-    static search(FirstName,LastName,filters,AgeFrom,AgeTo){
-        let Query = "select * from onlyregistered o, fullyregistered f where o.MemberID = f.MemberID ";
+    static search(Email,FirstName,LastName,filters,AgeFrom,AgeTo){
+        let Query = "select  c.MemberID, Gender, c.EmailID, FirstName, LastName, AgeYear, AgeMonth, AgeDate, Citizenship,Height, Expectations, MartialStatus, ChildrenStatus, Religion, MotherTongue, Occupation from credentials c, onlyregistered o, fullyregistered f where c.Verified ='Y' and o.MemberID = c.MemberID = f.MemberID and f.Occupation is not null and o.EmailID <> '" + Email + "' " ;
         for(let f in filters){
             if(filters[f])
                 Query += ` and ${f} = '${filters[f]}' `;
@@ -185,7 +185,7 @@ module.exports = class User {
             Query += ` and ${Date.now()/(3600000 * 24*365) +1970} - (AgeYear+(AgeMonth)/12+((AgeDate)/365)) >= ${AgeFrom} `;
         else if(AgeTo)
             Query += ` and ${Date.now()/(3600000 * 24*365) +1970} - (AgeYear+(AgeMonth)/12+((AgeDate)/365)) <= ${AgeTo} `;
-console.log(Query)
+        console.log(Query)
         return db.execute(Query)
             .then(result=>  result[0])
             .catch(err => console.log(err));
