@@ -16,6 +16,7 @@ router.get('/contact',userController.getContactpage);
 router.get('/delete-account',userController.getDeleteAccount);
 router.get('/hotels',userController.getHotels);
 router.get('/search',userController.getSearch);
+router.post('/GetProfile/:memberID',userController.getProfile);
 router.get('/destination',userController.getDestination);
 router.get('/edit-profile',userController.getEdit);
 router.post('/edit-profile',userController.postEdit);

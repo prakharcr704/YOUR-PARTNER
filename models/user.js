@@ -167,7 +167,7 @@ module.exports = class User {
     }
 
     static search(Email,FirstName,LastName,filters,AgeFrom,AgeTo){
-        let Query = "select  c.MemberID, Gender, c.EmailID, FirstName, LastName, AgeYear, AgeMonth, AgeDate, Citizenship,Height, Expectations, MartialStatus, ChildrenStatus, Religion, MotherTongue, Occupation from credentials c, onlyregistered o, fullyregistered f where c.Verified ='Y' and o.MemberID = c.MemberID = f.MemberID and f.Occupation is not null and o.EmailID <> '" + Email + "' " ;
+        let Query = "select  c.MemberID, Gender, c.EmailID, FirstName, LastName, AgeYear, AgeMonth, AgeDate, Citizenship,Height, Expectations, MartialStatus, ChildrenStatus, Religion, MotherTongue, Occupation from credentials c, onlyregistered o, fullyregistered f where c.Verified ='Y' and o.MemberID = c.MemberID and c.MemberID = f.MemberID and f.Occupation is not null and o.EmailID <> '" + Email + "' " ;
         for(let f in filters){
             if(filters[f])
                 Query += ` and ${f} = '${filters[f]}' `;
@@ -212,5 +212,9 @@ module.exports = class User {
         return db.execute(`update credentials set Verified = 'Y' where EmailID = "${email}"`);
     }
 
+    static getProfile(memberID){
+        let Query = " select distinct * from credentials c, onlyregistered o, fullyregistered f where f.MemberID = o.MemberID and o.MemberID = c.MemberID and occupation is not null and c.MemberID = " + memberID
+        return db.execute(Query);
+    }
 };
 

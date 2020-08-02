@@ -260,3 +260,12 @@ exports.getSearchResults = (req,res)=>{
         })
         .catch(err => console.log(err));
 }
+
+exports.getProfile = (req,res) =>{
+    const memberID = req.params.memberID;
+    User.getProfile(memberID)
+        .then( profile =>{
+            res.send(profile[0]);
+        })
+        .catch(err => console.log(err));
+}
