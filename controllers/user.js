@@ -66,8 +66,13 @@ exports.getDeleteAccount =(req,res)=>{
     User.deleteAccount(req.session.email)
         .then(() => {
             console.log('Account deleted: '+req.session.email);
-            req.session = undefined;
-            res.redirect('/');
+            req.session.isLoggedIn = false;
+            req.session.email = false;
+            res.render('index',{
+                pageTitle:"Your Partner — Explore new era of Wedding planner",
+                path: "homepage",
+                isLoggedIn: req.session.isLoggedIn
+            });
         })
         .catch(err => console.log(err));
 };
@@ -262,10 +267,20 @@ exports.getSearchResults = (req,res)=>{
 }
 
 exports.getProfile = (req,res) =>{
+    const isLoggedIn = req.session.isLoggedIn;
+    if(!isLoggedIn) {
+        res.redirect('/auth/login');
+        return;
+    }
     const memberID = req.params.memberID;
     User.getProfile(memberID)
         .then( profile =>{
-            res.send(profile[0]);
+            res.render('profile-page',{
+                pageTitle: profile[0][0].FirstName + " " + profile[0][0].LastName,
+                path: "view-profile",
+                profile: profile[0][0],
+                isLoggedIn: isLoggedIn
+            });
         })
         .catch(err => console.log(err));
 }
